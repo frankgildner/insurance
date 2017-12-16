@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
+            
+    </h:head>
+    <h:body>
+        <nav class='navbar navbar-default'>
+		<div class='container'>
+			<div class="navbar-collapse collapse">
+				<ul class='nav navbar-nav navbar-left'>
+					<li><h:link value="Profile" outcome="profile"/></li>
+					<li><h:link value="Settings" outcome="settings"/></li>
+					<li><h:link value="Register" outcome="register"/></li>
+					<li><h:link value="Login" outcome="login"/></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+        <div class="container">
+            <h:form>
+                    <div class="form-group">
+                            <label>E-Mail</label>
+                            <input class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Firstname</label>
+                            <input class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Lastname</label>
+                            <input class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password"/>
+                    </div>
+                    <div class="form-group">
+                            <label>IBAN</label>
+                            <input class="form-control" type="text"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Birthday</label>
+                            <input class="form-control" type="date"/>
+                    </div>
+                <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{loginModel.register()}"/>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
+
+
