@@ -25,14 +25,14 @@ and open the template in the editor.
                                         <li><h:link value="Damagecases" outcome="damagecases"/></li>
 				</ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a>#{loginModel.firstName}</a></li>
-                                <li><h:commandLink value="Logout" action="#{loginModel.logout()}"/></li>
+                                <li><a>#{customerModel.firstName}</a></li>
+                                <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
                             </ul>
 			</div>
 		</div>
 	</nav>
         <div class="container">
-            <h1>Hallo User #{loginModel.email}</h1>
+            <h1>Hallo User #{customerModel.email}</h1>
         </div>
     </h:body>
 </html>

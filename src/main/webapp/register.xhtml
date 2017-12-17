@@ -5,22 +5,20 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <!-- load fontawesome -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-            
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>   
     </h:head>
     <h:body>
         <nav class='navbar navbar-default'>
 		<div class='container'>
 			<div class="navbar-collapse collapse">
 				<ul class='nav navbar-nav navbar-left'>
-					<li><h:link value="Profile" outcome="profile"/></li>
-					<li><h:link value="Settings" outcome="settings"/></li>
 					<li><h:link value="Register" outcome="register"/></li>
 					<li><h:link value="Login" outcome="login"/></li>
 				</ul>
@@ -31,33 +29,51 @@ and open the template in the editor.
             <h:form>
                     <div class="form-group">
                             <label>E-Mail</label>
-                            <input class="form-control" type="text"/>
+                            <h:inputText class="form-control" value="#{customerModel.email}"/>
                     </div>
                     <div class="form-group">
                             <label>Firstname</label>
-                            <input class="form-control" type="text"/>
+                            <h:inputText class="form-control" value="#{customerModel.firstname}"/>
                     </div>
                     <div class="form-group">
                             <label>Lastname</label>
-                            <input class="form-control" type="text"/>
+                            <h:inputText class="form-control" value="#{customerModel.lastname}"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Street</label>
+                            <h:inputText class="form-control" value="#{customerModel.street}"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Postcode</label>
+                            <h:inputText class="form-control" value="#{customerModel.postCode}"/>
+                    </div>
+                    <div class="form-group">
+                            <label>City</label>
+                            <h:inputText class="form-control" value="#{customerModel.city}"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Country</label>
+                            <h:inputText class="form-control" value="#{customerModel.country}"/>
                     </div>
                     <div class="form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password"/>
+                            <h:inputSecret class="form-control"  value="#{customerModel.password}"/>
                     </div>
                     <div class="form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password"/>
+                            <h:inputSecret class="form-control" value="#{customerModel.password2}"/>
                     </div>
                     <div class="form-group">
                             <label>IBAN</label>
-                            <input class="form-control" type="text"/>
+                            <h:inputText class="form-control" value="#{customerModel.iban}"/>
                     </div>
                     <div class="form-group">
                             <label>Birthday</label>
-                            <input class="form-control" type="date"/>
+                            <h:inputText class="form-control" value="#{customerModel.birthday}">
+                                <f:convertDateTime pattern="d-M-yyyy" />
+                            </h:inputText>
                     </div>
-                <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{loginModel.register()}"/>
+                <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
             </h:form>
         </div>
     </h:body>

@@ -5,13 +5,14 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Customer implements Serializable{
-    @Id private long custID;
+    @Id @GeneratedValue private long custID;
     private String prename;
     private String surname;
     @OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST,CascadeType.REMOVE})
@@ -25,16 +26,14 @@ public class Customer implements Serializable{
     public Customer(){
     }
     
-    public Customer(long custID, String prename, String surname, Address address, String iban, Date birthday, String password, String email) {
-        this.custID = custID;
+    public Customer(String email, String prename, String surname, Address address, String iban, Date birthday, String password) {
         this.prename = prename;
         this.surname = surname;
         this.address=address;
         this.iban = iban;
         this.birthday=birthday;
         this.password = password;
-        this.email = email;
-        
+        this.email = email;   
     }
 
     public long getCustID() {

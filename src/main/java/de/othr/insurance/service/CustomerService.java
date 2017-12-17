@@ -1,6 +1,8 @@
 package de.othr.insurance.service;
 
+import de.othr.insurance.entity.Address;
 import de.othr.insurance.entity.Customer;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.enterprise.context.RequestScoped;
@@ -17,10 +19,19 @@ public class CustomerService {
     private EntityManager entityManager;
     
     @Transactional
-    public Customer signup(Customer neu){
-        //anwendungslogik
-        entityManager.persist(neu);
-        return neu;
+    public Customer signup(String email, String firstname, String lastname, Date birthday, String iban, String street, int postCode, String city, String country, String password){
+        Customer c = new Customer(email,
+                firstname,
+                lastname, 
+                new Address(street,
+                    postCode,
+                    city,
+                    country),
+                iban,
+                birthday,
+                password);
+        entityManager.persist(c);
+        return c;
     }
     
     @Transactional

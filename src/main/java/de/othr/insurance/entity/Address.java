@@ -2,11 +2,12 @@ package de.othr.insurance.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Address implements Serializable {
-    @Id private long addressID;
+    @Id @GeneratedValue private long addressID;
     private String street;
     private int postCode;
     private String city;
@@ -15,8 +16,7 @@ public class Address implements Serializable {
     public Address(){
     }
 
-    public Address(long addressID, String street, int postCode, String city, String country) {
-        this.addressID = addressID;
+    public Address(String street, int postCode, String city, String country) {
         this.street = street;
         this.postCode = postCode;
         this.city = city;

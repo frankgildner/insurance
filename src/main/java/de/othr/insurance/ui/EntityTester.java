@@ -33,18 +33,18 @@ public class EntityTester extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet EntityTester at " + request.getContextPath() + "</h1>");
 
-            Customer b = new Customer(1,
-                    "frank",
-                    "gildner",
-                    new Address(new Random().nextInt(999999),"ffstraße 21",93051,"Regensburg","Deutschland"),
-                    "tolle IBAN",
-                    new Date(),
-                    "testpassword",
-                    "fg@fg.de"
-            );
+           // Customer b = new Customer(
+            //        "frank",
+            //        "gildner",
+            //       new Address(new Random().nextInt(999999),"ffstraße 21",93051,"Regensburg","Deutschland"),
+            //        "tolle IBAN",
+            //        new Date(),
+            //        "testpassword",
+            //        "fg@fg.de"
+            //);
             //b = custService.signup(b);
             
-            out.println("Customer angelegt!"+polService.getPoliciesByCustomer(b));
+            //out.println("Customer angelegt!"+polService.getPoliciesByCustomer(b));
             out.println("</body>");
             out.println("</html>");
         }
