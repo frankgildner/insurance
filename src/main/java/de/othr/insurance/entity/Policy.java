@@ -11,13 +11,13 @@ public class Policy implements Serializable {
     private Date startDate;
     private int duration;
     private double price;
-    private Customer custID;
+    private long custID;
     private PolicyType policyTypeID;
     
     public Policy() {
     }
 
-    public Policy(Date startDate, int duration, double price, Customer custID, PolicyType policyTypeID) {
+    public Policy(Date startDate, int duration, double price, long custID, PolicyType policyTypeID) {
         this.startDate = startDate;
         this.duration = duration;
         this.price = price;
@@ -57,11 +57,11 @@ public class Policy implements Serializable {
         this.price = price;
     }
 
-    public Customer getCustID() {
+    public long getCustID() {
         return custID;
     }
 
-    public void setCustID(Customer custID) {
+    public void setCustID(long custID) {
         this.custID = custID;
     }
 

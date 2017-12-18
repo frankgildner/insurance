@@ -27,11 +27,11 @@ public class Util {
         return  session.getAttribute("user").toString();
       }
        
-      public static String getUserId()
+      public static String getUser()
       {
         HttpSession session = getSession();
         if ( session != null )
-            return (String) session.getAttribute("userid");
+            return (String) session.getAttribute("user");
         else
             return null;
       }

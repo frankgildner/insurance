@@ -5,7 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -26,13 +27,41 @@ and open the template in the editor.
 				</ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>#{customerModel.firstName}</a></li>
-                                <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
+                                <li><h:form><a><h:commandLink value="Logout" action="#{customerModel.logout()}"/></a></h:form></li>
                             </ul>
 			</div>
 		</div>
 	</nav>
         <div class="container">
-            <h1>Hallo User #{customerModel.email}</h1>
+            <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy">
+                <h:column>
+                    <f:facet name="header">
+                        Policy No
+                    </f:facet>
+                    #{policy.policyId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Start Date
+                    </f:facet>
+                    #{policy.startDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Duration
+                    </f:facet>
+                    #{policy.duration}
+                </h:column>
+                <h:column>
+                    #{policy.price}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        PolicyTypeId
+                    </f:facet>
+                    #{policy.policyTypeID}
+                </h:column>
+            </h:dataTable>
         </div>
     </h:body>
 </html>
