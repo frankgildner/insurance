@@ -13,7 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <!-- load fontawesome -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-            
+        #{policyModel.init()}
     </h:head>
     <h:body>
         <nav class='navbar navbar-default'>
@@ -24,6 +24,7 @@ and open the template in the editor.
 					<li><h:link value="Settings" outcome="settings"/></li>
 					<li><h:link value="Policies" outcome="policies"/></li>
                                         <li><h:link value="Damagecases" outcome="damagecases"/></li>
+                                        <li><h:link value="PolicyTypes" outcome="policytypes"/></li>
 				</ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>#{customerModel.firstName}</a></li>
@@ -33,6 +34,25 @@ and open the template in the editor.
 		</div>
 	</nav>
         <div class="container">
+            <h:form>
+                    <div class="form-group">
+                            <label>Duration</label>
+                            <h:inputText class="form-control" value="#{policyModel.duration}"/>
+                    </div>
+                    <div class="form-group">
+                            <label>Item ID</label>
+                            <h:inputText class="form-control" value="#{policyModel.itemId}"/>
+                    </div>
+                <div class="form-group">
+                    <label>PolicyType</label>
+                    <h:selectOneMenu value ="#{policyModel.selectedPolicyType}" class="form-control">
+                        <f:converter converterId="de.othr.insurance.converter.PolicyTypeConverter"/>
+                        <f:selectItems value="#{policyModel.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
+                    </h:selectOneMenu>
+                </div>
+                
+                <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyModel.createPolicy()}"/>
+            </h:form>
             <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy">
                 <h:column>
                     <f:facet name="header">

@@ -2,11 +2,12 @@ package de.othr.insurance.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-class PolicyType implements Serializable {
-    @Id private long policyTypeID;
+public class PolicyType implements Serializable {
+    @Id @GeneratedValue private long policyTypeID;
     private String name;
     private double selfparticipation;
     private double pricePerDay;

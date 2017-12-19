@@ -3,12 +3,13 @@ package de.othr.insurance.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class PolicyApplicationDTO implements Serializable{
 
-    @Id private long paDtoId;
+    @Id @GeneratedValue private long paDtoId;
     private String prename;
     private String surname;
     private String street;
@@ -20,17 +21,21 @@ public class PolicyApplicationDTO implements Serializable{
     private int duration;
     private String password;
     private String email;
+    private String iban;
+    private int postalCode;
+    private String country;
     private PolicyType policyType;
     
     public PolicyApplicationDTO() {
     }
 
-    public PolicyApplicationDTO(long paDtoId, String prename, String surname, String street, String city, Date birthdate, long itemID, String description, Date startDate, int duration, String password, String email, PolicyType policyType) {
-        this.paDtoId = paDtoId;
+    public PolicyApplicationDTO(String prename, String surname, String iban, String street, int postalCode, String city, String country, Date birthdate, long itemID, String description, Date startDate, int duration, String password, String email, PolicyType policyType) {
         this.prename = prename;
         this.surname = surname;
         this.street = street;
+        this.iban = iban;
         this.city = city;
+        this.postalCode = postalCode;
         this.birthdate = birthdate;
         this.itemID = itemID;
         this.description = description;
@@ -39,6 +44,31 @@ public class PolicyApplicationDTO implements Serializable{
         this.password = password;
         this.email = email;
         this.policyType = policyType;
+        this.country = country;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public long getPaDtoId() {

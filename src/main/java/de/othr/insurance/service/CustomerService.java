@@ -53,4 +53,16 @@ public class CustomerService {
         entityManager.remove(c);
         return "Customer successfully deleted";
     }
+    
+    @Transactional
+    public Customer getCustomerByEmail(String email){
+        Query q = entityManager.createQuery("Select c from Customer as c where c.email = :email");
+        q.setParameter("email", email);
+        List<Customer> cust = q.getResultList();
+        if(cust.isEmpty()){
+            return null;
+        } else {
+            return cust.get(0);
+        }
+    }
 }
