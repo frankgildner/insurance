@@ -16,7 +16,6 @@ public class PolicyApplicationDTO implements Serializable{
     private String city;
     private Date birthdate;
     private long itemID;
-    private String description;
     private Date startDate;
     private int duration;
     private String password;
@@ -29,7 +28,7 @@ public class PolicyApplicationDTO implements Serializable{
     public PolicyApplicationDTO() {
     }
 
-    public PolicyApplicationDTO(String prename, String surname, String iban, String street, int postalCode, String city, String country, Date birthdate, long itemID, String description, Date startDate, int duration, String password, String email, PolicyType policyType) {
+    public PolicyApplicationDTO(String prename, String surname, String iban, String street, int postalCode, String city, String country, Date birthdate, long itemID, Date startDate, int duration, String password, String email, PolicyType policyType) {
         this.prename = prename;
         this.surname = surname;
         this.street = street;
@@ -38,7 +37,6 @@ public class PolicyApplicationDTO implements Serializable{
         this.postalCode = postalCode;
         this.birthdate = birthdate;
         this.itemID = itemID;
-        this.description = description;
         this.startDate = startDate;
         this.duration = duration;
         this.password = password;
@@ -127,13 +125,6 @@ public class PolicyApplicationDTO implements Serializable{
         this.itemID = itemID;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Date getStartDate() {
         return startDate;

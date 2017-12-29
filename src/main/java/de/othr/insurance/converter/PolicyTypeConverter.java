@@ -3,17 +3,20 @@ package de.othr.insurance.converter;
 import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.service.PolicyService;
 import de.othr.insurance.service.PolicyTypeService;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-@FacesConverter("de.othr.insurance.converter.PolicyTypeConverter")
+@Named
+@ApplicationScoped
 public class PolicyTypeConverter implements Converter{
     
     @Inject
-    private PolicyService polService;
+    PolicyService polService;
     @Inject 
     PolicyTypeService poltypeService;
 
@@ -22,6 +25,8 @@ public class PolicyTypeConverter implements Converter{
         if(value==null){
             return "";
         }
+        System.out.println(value);
+                System.out.println(Long.parseLong(value));
         PolicyType polT = poltypeService.getPolicyTypeById(Long.parseLong(value));
         if(polT==null){
             return "";

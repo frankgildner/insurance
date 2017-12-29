@@ -34,7 +34,14 @@ and open the template in the editor.
 		</div>
 	</nav>
         <div class="container">
-            <h:form>
+            <div class="col-md-6">
+                <h:form>
+                    <div class="form-group">
+                        <label>Startdate(d-m-yyyy)</label>
+                        <h:inputText class="form-control" value="#{policyModel.startDate}">
+                            <f:convertDateTime pattern="d-M-yyyy" />
+                        </h:inputText>
+                    </div>
                     <div class="form-group">
                             <label>Duration</label>
                             <h:inputText class="form-control" value="#{policyModel.duration}"/>
@@ -43,45 +50,48 @@ and open the template in the editor.
                             <label>Item ID</label>
                             <h:inputText class="form-control" value="#{policyModel.itemId}"/>
                     </div>
-                <div class="form-group">
-                    <label>PolicyType</label>
-                    <h:selectOneMenu value ="#{policyModel.selectedPolicyType}" class="form-control">
-                        <f:converter converterId="de.othr.insurance.converter.PolicyTypeConverter"/>
-                        <f:selectItems value="#{policyModel.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
-                    </h:selectOneMenu>
-                </div>
-                
-                <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyModel.createPolicy()}"/>
-            </h:form>
-            <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy">
-                <h:column>
-                    <f:facet name="header">
-                        Policy No
-                    </f:facet>
-                    #{policy.policyId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Start Date
-                    </f:facet>
-                    #{policy.startDate}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        Duration
-                    </f:facet>
-                    #{policy.duration}
-                </h:column>
-                <h:column>
-                    #{policy.price}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        PolicyTypeId
-                    </f:facet>
-                    #{policy.policyTypeID}
-                </h:column>
-            </h:dataTable>
+                    <div class="form-group">
+                        <label>PolicyType</label>
+                        <h:selectOneMenu value ="#{policyModel.selectedPolicyType}" class="form-control">
+                            <f:converter binding="#{policyModel.polTypeConv}"/>
+                            <f:selectItems value="#{policyModel.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyModel.createPolicy()}"/>
+                </h:form>
+            </div>
+            <div class="col-md-6">
+                <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy">
+                    <h:column>
+                        <f:facet name="header">
+                            PolicyID
+                        </f:facet>
+                        #{policy.policyId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Start Date
+                        </f:facet>
+                        #{policy.startDate}
+                        <f:convertDateTime pattern="d-M-yyyy"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            Duration
+                        </f:facet>
+                        #{policy.duration}
+                    </h:column>
+                    <h:column>
+                        #{policy.price}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            PolicyTypeId
+                        </f:facet>
+                        #{policy.policyTypeID}
+                    </h:column>
+                </h:dataTable>
+            </div>    
         </div>
     </h:body>
 </html>

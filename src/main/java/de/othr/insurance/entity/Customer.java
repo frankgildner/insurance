@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -119,10 +118,7 @@ public class Customer implements Serializable{
             return false;
         }
         final Customer other = (Customer) obj;
-        if (this.custID != other.custID) {
-            return false;
-        }
-        return true;
+        return this.custID == other.custID;
     }
     
 }

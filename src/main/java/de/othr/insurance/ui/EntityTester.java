@@ -2,8 +2,10 @@ package de.othr.insurance.ui;
 
 import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.Address;
+import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.service.CustomerService;
 import de.othr.insurance.service.PolicyService;
+import de.othr.insurance.service.PolicyTypeService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -18,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "EntityTester", urlPatterns = {"/EntityTester"})
 public class EntityTester extends HttpServlet {
     @Inject
-    private CustomerService custService;
-    private PolicyService polService;
+    CustomerService custService;
+    @Inject 
+    PolicyTypeService poltypeService;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,19 +36,8 @@ public class EntityTester extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet EntityTester at " + request.getContextPath() + "</h1>");
-
-           // Customer b = new Customer(
-            //        "frank",
-            //        "gildner",
-            //       new Address(new Random().nextInt(999999),"ffstraße 21",93051,"Regensburg","Deutschland"),
-            //        "tolle IBAN",
-            //        new Date(),
-            //        "testpassword",
-            //        "fg@fg.de"
-            //);
-            //b = custService.signup(b);
-            
-            //out.println("Customer angelegt!"+polService.getPoliciesByCustomer(b));
+            PolicyType x = poltypeService.getPolicyTypeById(3);
+            out.println("policytype 3"+x.getName());
             out.println("</body>");
             out.println("</html>");
         }
