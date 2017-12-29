@@ -19,7 +19,7 @@ public class PolicyModel implements Serializable{
     @Inject
     PolicyService polService;
     @Inject
-    CustomerModel custModel;
+    CustModel custModel;
     @Inject 
     PolicyTypeService poltypeService;
     @Inject

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Named
 @SessionScoped
-public class customerModel implements Serializable{
+public class CustModel implements Serializable{
     
     @Inject
     private CustomerService custService;
@@ -35,6 +35,14 @@ public class customerModel implements Serializable{
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void setFirstname(String firstname) {
