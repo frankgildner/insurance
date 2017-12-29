@@ -77,6 +77,11 @@ public class PolicyType implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return name + "(" + selfparticipation*100 + " % SP, " + pricePerDay + " €/day)";
+    }
     
     
 }

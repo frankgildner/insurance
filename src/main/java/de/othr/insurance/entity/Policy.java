@@ -14,7 +14,8 @@ public class Policy implements Serializable {
     private Date startDate;
     private int duration;
     private double price;
-    private long custID;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+    private Customer custID;
     private long itemID;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private PolicyType policyTypeID;
@@ -22,7 +23,7 @@ public class Policy implements Serializable {
     public Policy() {
     }
 
-    public Policy(Date startDate, int duration, long itemID, double price, long custID, PolicyType policyTypeID) {
+    public Policy(Date startDate, int duration, long itemID, double price, Customer custID, PolicyType policyTypeID) {
         this.startDate = startDate;
         this.duration = duration;
         this.price = price;
@@ -71,11 +72,11 @@ public class Policy implements Serializable {
         this.price = price;
     }
 
-    public long getCustID() {
+    public Customer getCustID() {
         return custID;
     }
 
-    public void setCustID(long custID) {
+    public void setCustID(Customer custID) {
         this.custID = custID;
     }
 

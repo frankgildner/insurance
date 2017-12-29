@@ -127,6 +127,7 @@ public class PolicyModel implements Serializable{
                 custModel.getPassword(),
                 custModel.getEmail(),
                 this.getSelectedPolicyType()));
+        
         this.setItemId(0);
         this.setDuration(0);
         return policy;
