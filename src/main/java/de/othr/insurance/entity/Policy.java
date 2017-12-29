@@ -16,6 +16,7 @@ public class Policy implements Serializable {
     private double price;
     private long custID;
     private long itemID;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private PolicyType policyTypeID;
     
     public Policy() {
