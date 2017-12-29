@@ -10,6 +10,6 @@ import javax.inject.Named;
 public class DamageCaseModel implements Serializable {
     
     @Inject 
-    CustModel custModel;
+    CustomerModel custModel;
     
 }

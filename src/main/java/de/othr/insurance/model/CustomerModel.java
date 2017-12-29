@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Named
 @SessionScoped
-public class CustModel implements Serializable{
+public class CustomerModel implements Serializable{
     
     @Inject
     private CustomerService custService;
