@@ -66,7 +66,11 @@ and open the template in the editor.
                         <f:facet name="header">
                             PolicyID
                         </f:facet>
-                        #{policy.policyId}
+                        <h:form>
+                            <h:commandLink value="#{policy.policyId}" action="#{policyModel.editPolicy}">
+                                <f:setPropertyActionListener target="#{policyModel.pol}" value="#{policy}" />
+                            </h:commandLink>
+                        </h:form>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

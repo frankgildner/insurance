@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.html.HtmlDataTable;
+import javax.faces.component.html.HtmlInputHidden;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,6 +35,33 @@ public class PolicyModel implements Serializable{
     private PolicyType selectedPolicyType;
     private Policy policy;
     private Date startDate;
+    private Policy pol;
+    private HtmlDataTable dataTable;
+    private HtmlInputHidden dataItemId = new HtmlInputHidden(); 
+
+    public HtmlInputHidden getDataItemId() {
+        return dataItemId;
+    }
+
+    public void setDataItemId(HtmlInputHidden dataItemId) {
+        this.dataItemId = dataItemId;
+    }
+
+    public Policy getPol() {
+        return pol;
+    }
+
+    public void setPol(Policy pol) {
+        this.pol = pol;
+    }
+
+    public HtmlDataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(HtmlDataTable dataTable) {
+        this.dataTable = dataTable;
+    }
 
     public PolicyTypeConverter getPolTypeConv() {
         return polTypeConv;
@@ -131,5 +160,11 @@ public class PolicyModel implements Serializable{
         this.setItemId(0);
         this.setDuration(0);
         return policy;
+    }
+
+    public String editPolicy(){
+        dataItemId.setValue(pol.getPolicyId());
+        
+        return "policydetail";
     }
 }
