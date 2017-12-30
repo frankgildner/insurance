@@ -22,6 +22,8 @@ public class PolicyService implements Serializable{
     private EntityManager entityManager;
     @Inject
     CustomerService custServ;
+    @Inject
+    PolicyTypeService polServ;
     
     @Transactional
     public Policy newPolicy(PolicyApplicationDTO p){
@@ -63,5 +65,9 @@ public class PolicyService implements Serializable{
     public double calculatePrice(int duration, PolicyType polType){
         double price = duration*polType.getPricePerDay();
         return price;
+    }
+    @Transactional
+    public List<PolicyType> getPolicyTypes(){
+        return polServ.getPolicyTypes();
     }
 }
