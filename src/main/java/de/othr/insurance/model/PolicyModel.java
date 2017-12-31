@@ -162,9 +162,13 @@ public class PolicyModel implements Serializable{
         return policy;
     }
 
-    public String editPolicy(){
+    public String showPolicy(){
         dataItemId.setValue(pol.getPolicyId());
-        
         return "policydetail";
+    }
+    
+    public String  cancelPol(Policy policy){
+        polService.cancelPolicy(policy);
+        return "policies";
     }
 }

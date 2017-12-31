@@ -70,4 +70,9 @@ public class PolicyService implements Serializable{
     public List<PolicyType> getPolicyTypes(){
         return polServ.getPolicyTypes();
     }
+    @Transactional
+    public void cancelPolicy(Policy policy){
+        Policy p = entityManager.find(Policy.class,policy.getPolicyId());
+        entityManager.remove(p);
+    }
 }

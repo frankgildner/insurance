@@ -49,6 +49,7 @@ and open the template in the editor.
                     
                     <h:outputText value="Policy Type" />
                     <h:inputText value="#{policyModel.pol.policyTypeID}" />
+                    <h:commandButton value="Delete" immediate="true" action="#{policyModel.cancelPol(policyModel.pol)}" />
                 </h:panelGrid>
             </h:form>
          </div>
