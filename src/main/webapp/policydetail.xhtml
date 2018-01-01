@@ -17,6 +17,7 @@ and open the template in the editor.
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
      <h:body>
+        <h:form>
         <nav class='navbar navbar-default'>
 		<div class='container-fluid'>
                     <div class="navbar-header">
@@ -37,12 +38,13 @@ and open the template in the editor.
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>#{customerModel.firstName}</a></li>
-                                <li><h:form><a><h:commandLink value="Logout" action="#{customerModel.logout()}"/></a></h:form></li>
+                                <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
                             </ul>
                     </div>
                     
 		</div>
 	</nav>
+     </h:form> 
          <div class="container">
             <h:form>
                 <h:panelGrid columns="2">
