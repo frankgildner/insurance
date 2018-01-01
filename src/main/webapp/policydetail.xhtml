@@ -13,23 +13,34 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <!-- load fontawesome -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </h:head>
      <h:body>
         <nav class='navbar navbar-default'>
-		<div class='container'>
-			<div class="navbar-collapse collapse">
-				<ul class='nav navbar-nav navbar-left'>
-					<li><h:link value="Profile" outcome="profile"/></li>
-					<li><h:link value="Settings" outcome="settings"/></li>
-					<li><h:link value="Policies" outcome="policies"/></li>
-                                        <li><h:link value="Damagecases" outcome="damagecases"/></li>
-                                        <li><h:link value="PolicyTypes" outcome="policytypes"/></li>
-				</ul>
+		<div class='container-fluid'>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Insurance</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class='nav navbar-nav navbar-left'>
+                                    <li><h:link value="Profile" outcome="profile"/></li>
+                                    <li><h:link value="Settings" outcome="settings"/></li>
+                                    <li><h:link value="Policies" outcome="policies"/></li>
+                                    <li><h:link value="Damagecases" outcome="damagecases"/></li>
+                                    <li><h:link value="PolicyTypes" outcome="policytypes"/></li>
+                            </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>#{customerModel.firstName}</a></li>
                                 <li><h:form><a><h:commandLink value="Logout" action="#{customerModel.logout()}"/></a></h:form></li>
                             </ul>
-			</div>
+                    </div>
+                    
 		</div>
 	</nav>
          <div class="container">
@@ -37,18 +48,21 @@ and open the template in the editor.
                 <h:panelGrid columns="2">
                     <h:outputText value="ID" />
                     <h:outputText value="#{policyModel.pol.policyId}" />
+                    
+                    <h:outputText value="Item" />
+                    <h:outputText value="#{policyModel.pol.itemID}" />
 
                     <h:outputText value="StartDate" />
-                    <h:inputText value="#{policyModel.pol.startDate}" />
+                    <h:outputText value="#{policyModel.pol.startDate}" />
 
                     <h:outputText value="Duration" />
-                    <h:inputText value="#{policyModel.pol.duration}" />
+                    <h:outputText value="#{policyModel.pol.duration}" />
                     
                     <h:outputText value="Price" />
-                    <h:inputText value="#{policyModel.pol.price}" />
+                    <h:outputText value="#{policyModel.pol.price}" />
                     
                     <h:outputText value="Policy Type" />
-                    <h:inputText value="#{policyModel.pol.policyTypeID}" />
+                    <h:outputText value="#{policyModel.pol.policyTypeID}" />
                     <h:commandButton value="Delete" immediate="true" action="#{policyModel.cancelPol(policyModel.pol)}" />
                 </h:panelGrid>
             </h:form>

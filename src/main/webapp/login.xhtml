@@ -12,17 +12,27 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <!-- load fontawesome -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
     </h:head>
     <h:body>
         <nav class='navbar navbar-default'>
-		<div class='container'>
-			<div class="navbar-collapse collapse">
-				<ul class='nav navbar-nav navbar-left'>
-					<li><h:link value="Register" outcome="register"/></li>
-					<li><h:link value="Login" outcome="login"/></li>
-				</ul>
-			</div>
+		<div class='container-fluid'>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Insurance</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class='nav navbar-nav'>
+                            <li><h:link value="Register" outcome="register"/></li>
+                            <li><h:link value="Login" outcome="login"/></li>
+                        </ul>
+                    </div>
+                    
 		</div>
 	</nav>
         <div class="container">
