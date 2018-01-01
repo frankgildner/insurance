@@ -25,8 +25,6 @@ public class PolicyTypeConverter implements Converter{
         if(value==null){
             return "";
         }
-        System.out.println(value);
-                System.out.println(Long.parseLong(value));
         PolicyType polT = poltypeService.getPolicyTypeById(Long.parseLong(value));
         if(polT==null){
             return "";

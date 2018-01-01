@@ -19,13 +19,7 @@ public class PolicyTypeService {
     @Transactional
     public List<PolicyType> getPolicyTypes(){
         Query q = entityManager.createQuery("Select pt from PolicyType pt", PolicyType.class);
-        //PolicyType pol = new PolicyType("first",0.11,40);
-        //PolicyType pol2 = new PolicyType("second",0.12,42);
         List<PolicyType> all = q.getResultList();
-        
-        //List<PolicyType> all = null;
-        //all.add(pol);
-        //all.add(pol2);
         return all;
     }
     @Transactional

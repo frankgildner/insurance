@@ -1,16 +1,23 @@
 package de.othr.insurance.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class DamageCase implements Serializable{
-    @Id private long damageCaseId;
+    @Id @GeneratedValue private long damageCaseId;
     private String description;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private DamageType damageType;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Customer custID;
     private double costs;
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private long policyNr;
 
     public DamageCase() {
