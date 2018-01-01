@@ -2,11 +2,12 @@ package de.othr.insurance.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class DamageType implements Serializable {
-    @Id private long damageTypeID;
+    @Id @GeneratedValue private long damageTypeID;
     private String name;
 
     public DamageType(){

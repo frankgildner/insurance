@@ -21,4 +21,12 @@ public class DamageTypeService {
         List<DamageType> allDamTypes = q.getResultList();
         return allDamTypes;
     }
+    @Transactional 
+    public DamageType getDamageTypeById(long id){
+        Query q = entityManager.createQuery("Select dt from DamageType as dt where dt.damageTypeID=:id",DamageType.class);
+        q.setParameter("id",id);
+        List<DamageType> list = q.getResultList();
+        DamageType damType = list.get(0);
+        return damType;
+    }
 }
