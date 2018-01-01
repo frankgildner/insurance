@@ -29,4 +29,11 @@ public class DamageTypeService {
         DamageType damType = list.get(0);
         return damType;
     }
+    
+    @Transactional
+    public DamageType createDamageType(String name){
+        DamageType newDT = new DamageType(name);
+        entityManager.persist(newDT);
+        return newDT;
+    }
 }
