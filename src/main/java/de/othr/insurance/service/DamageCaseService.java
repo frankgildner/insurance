@@ -37,8 +37,9 @@ public class DamageCaseService implements Serializable{
     }
 
     @Transactional
-    public DamageCase newDamagecase(String description, Policy policyNr, DamageType damagetype, Customer customer, double costs){
-        DamageCase neu = new DamageCase(description, damagetype, policyNr, customer,costs);
+    public DamageCase newDamagecase(String description, Policy policy, DamageType damagetype, Customer customer, double costs){
+        double selfpart = policy.getPolicyTypeID().getSelfparticipation();
+        DamageCase neu = new DamageCase(description, damagetype, policy, customer,costs, costs*selfpart);
         entityManager.persist(neu);
         return neu;
     }

@@ -19,16 +19,34 @@ public class DamageCase implements Serializable{
     private double costs;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Policy policyNr;
+    private double refund;
 
     public DamageCase() {
     }
 
-    public DamageCase(String description, DamageType damageType, Policy policyNr, Customer custID, double costs) {
+    public DamageCase(String description, DamageType damageType, Policy policyNr, Customer custID, double costs, double refund) {
         this.description = description;
         this.damageType = damageType;
         this.custID = custID;
         this.costs = costs;
         this.policyNr = policyNr;
+        this.refund = refund;
+    }
+
+    public Policy getPolicyNr() {
+        return policyNr;
+    }
+
+    public void setPolicyNr(Policy policyNr) {
+        this.policyNr = policyNr;
+    }
+
+    public double getRefund() {
+        return refund;
+    }
+
+    public void setRefund(double refund) {
+        this.refund = refund;
     }
     
     public long getDamageCaseId() {
