@@ -29,16 +29,17 @@ public class DamageCaseService implements Serializable{
     }
     
     @Transactional
-    public List<DamageCase> getDamageCaseByCustomer (long customerID){
-        Query q = entityManager.createQuery("Select dc FROM DamageCase as dc WHERE dc.custID = :customerID");
-        q.setParameter("customerID", customerID);
+    public List<DamageCase> getDamageCaseByCustomer (Customer customer){
+        Query q = entityManager.createQuery("Select dc FROM DamageCase as dc WHERE dc.custID = :customer",DamageCase.class);
+        q.setParameter("customer", customer);
         List<DamageCase> damageCases = q.getResultList();
         return damageCases;
     }
 
     @Transactional
-    public void newDamagecase(String description, Policy policyNr, DamageType damagetype, Customer customer, double costs){
+    public DamageCase newDamagecase(String description, Policy policyNr, DamageType damagetype, Customer customer, double costs){
         DamageCase neu = new DamageCase(description, damagetype, policyNr, customer,costs);
         entityManager.persist(neu);
+        return neu;
     }
 }

@@ -80,4 +80,9 @@ public class PolicyService implements Serializable{
         Policy p = entityManager.find(Policy.class,policyID);
         return p;
     }
+    @Transactional
+    public Policy getPolicyById(long policyID){
+        Policy p = entityManager.find(Policy.class,policyID);
+        return p;
+    }
 }
