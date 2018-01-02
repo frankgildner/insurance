@@ -73,7 +73,7 @@ public class PolicyService implements Serializable{
     @Transactional
     public void cancelPolicy(Policy policy){
         Policy p = entityManager.find(Policy.class,policy.getPolicyId());
-        entityManager.remove(p);
+        p.setStatus("canceled");
     }
     @Transactional
     public Policy getPolicy(long policyID){

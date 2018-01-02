@@ -83,11 +83,13 @@ public class AdministrationModel implements Serializable {
     
     public PolicyType createPolicyType(){
         if(!this.policyTypeName.equals("") &&
-                this.selfpart > 0 &&
+                this.selfpart > -1 &&
                 this.costsPerDay > 0){
             this.polType = poltypeService.createPolicyType(policyTypeName, selfpart, costsPerDay);
         }
-        
+        this.policyTypeName = "";
+        this.selfpart = 0;
+        this.costsPerDay = 0;
         return this.polType;
     }
     
@@ -95,6 +97,7 @@ public class AdministrationModel implements Serializable {
         if(!this.damageTypeName.equals("")){
             this.damType = damTypeService.createDamageType(this.damageTypeName);
         }
+        this.damageTypeName = "";
         return this.damType;
     }
 }

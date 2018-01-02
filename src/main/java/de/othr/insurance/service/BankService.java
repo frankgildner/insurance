@@ -24,10 +24,10 @@ public class BankService {
             // TODO process result here
             //checkiban(string iban) customer wenn true null wenn nicht vorhanden
             //sender empfänger betrag (empfänger bin immer ich)
-            de.oth.gmeiner.swgmeiner.service.Transfer result = port.createTransfer("DE420409384547", "DE49070704024456", 20.1);
+            de.oth.gmeiner.swgmeiner.service.Transfer result = port.createTransfer("DE88549012303253", "DE65556666370676", 20.1);
             System.out.println("Result = "+result);
         if(result == null){
-            return "login";
+            return null;
         } else {
             return "signup";
         }

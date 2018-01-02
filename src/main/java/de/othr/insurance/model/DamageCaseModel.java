@@ -158,6 +158,10 @@ public class DamageCaseModel implements Serializable {
                 custModel.getCustomer(), 
                 //TODO
                 this.costs);
+        this.description = "";
+        this.selectedDamageType = null;
+        this.selectedPolicy = null;
+        this.costs = 0;
         return damageCase;
     }
     

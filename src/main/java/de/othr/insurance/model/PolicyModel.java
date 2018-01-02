@@ -168,11 +168,6 @@ public class PolicyModel implements Serializable{
             return null;
         }  
     }
-
-    public String showPolicy(){
-        dataItemId.setValue(pol.getPolicyId());
-        return "policydetail";
-    }
     
     public String  cancelPol(Policy policy){
         polService.cancelPolicy(policy);

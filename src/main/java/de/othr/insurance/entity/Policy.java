@@ -20,6 +20,7 @@ public class Policy implements Serializable {
     private long itemID;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private PolicyType policyTypeID;
+    private String status;
     
     public Policy() {
     }
@@ -31,6 +32,15 @@ public class Policy implements Serializable {
         this.custID = custID;
         this.itemID = itemID;
         this.policyTypeID = policyTypeID;
+        this.status = "running";
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getItemID() {
