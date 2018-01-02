@@ -8,7 +8,7 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Start Page</title>
+        <title>Administration</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <!-- load fontawesome -->
@@ -34,7 +34,7 @@ and open the template in the editor.
                                     <li><h:link value="Settings" outcome="settings"/></li>
                                     <li><h:link value="Policies" outcome="policies"/></li>
                                     <li><h:link value="Damagecases" outcome="damagecases"/></li>
-                                    <li><h:link value="PolicyTypes" outcome="policytypes"/></li>
+                                    <li><h:link value="Administration" outcome="administration"/></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a>#{customerModel.firstName}</a></li>
@@ -46,21 +46,34 @@ and open the template in the editor.
 	</nav>
     </h:form>
         <div class="container">
-            <h:form>
+            <div class="col-md-6">
+                <h:form>
+                        <div class="form-group">
+                                <label>Name</label>
+                                <h:inputText class="form-control" value="#{administrationModel.policyTypeName}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Selfparticipation</label>
+                                <h:inputText class="form-control" value="#{administrationModel.selfpart}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Costs Per Day</label>
+                                <h:inputText class="form-control" value="#{administrationModel.costsPerDay}"/>
+                        </div>
+                    <h:commandButton value="Create PolicyType" class="btn btn-success btn-lg btn-block" action="#{administrationModel.createPolicyType()}"/>
+                </h:form>  
+            </div>
+            <div class="col-md-6">
+                <h:form>
                     <div class="form-group">
-                            <label>Name</label>
-                            <h:inputText class="form-control" value="#{policyTypeModel.name}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Selfparticipation</label>
-                            <h:inputText class="form-control" value="#{policyTypeModel.selfpart}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Costs Per Day</label>
-                            <h:inputText class="form-control" value="#{policyTypeModel.costsPerDay}"/>
-                    </div>
-                <h:commandButton value="Create PolicyType" class="btn btn-success btn-lg btn-block" action="#{policyTypeModel.createPolicyType()}"/>
-            </h:form>    
+                        <label>Name</label>
+                        <h:inputText class="form-control" value="#{administrationModel.damageTypeName}"/>
+                    </div> 
+                    <h:commandButton value="Create DamageType" class="btn btn-success btn-lg btn block" action="#{administrationModel.createDamageType()}"/>
+                </h:form>
+                
+                
+            </div>
         </div>
     </h:body>
 </html>

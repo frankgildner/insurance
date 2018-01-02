@@ -16,8 +16,8 @@
             <to-view-id>/damagecases.xhtml</to-view-id>
             <from-outcome>register</from-outcome>
             <to-view-id>/register.xhtml</to-view-id>
-            <from-outcome>policytypes</from-outcome>
-            <to-view-id>/policytypes.xhtml</to-view-id>
+            <from-outcome>administration</from-outcome>
+            <to-view-id>/administration.xhtml</to-view-id>
             <from-outcome>policydetail</from-outcome>
             <to-view-id>/policydetail.xhtml</to-view-id>
         </navigation-case>

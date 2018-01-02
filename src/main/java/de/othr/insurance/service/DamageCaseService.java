@@ -3,6 +3,7 @@ package de.othr.insurance.service;
 import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.DamageCase;
 import de.othr.insurance.entity.DamageType;
+import de.othr.insurance.entity.Policy;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -36,7 +37,7 @@ public class DamageCaseService implements Serializable{
     }
 
     @Transactional
-    public void newDamagecase(String description, long policyNr, DamageType damagetype, Customer customer, double costs){
+    public void newDamagecase(String description, Policy policyNr, DamageType damagetype, Customer customer, double costs){
         DamageCase neu = new DamageCase(description, damagetype, policyNr, customer,costs);
         entityManager.persist(neu);
     }
