@@ -4,6 +4,7 @@ import de.othr.insurance.converter.PolicyTypeConverter;
 import de.othr.insurance.entity.Policy;
 import de.othr.insurance.entity.PolicyApplicationDTO;
 import de.othr.insurance.entity.PolicyType;
+import de.othr.insurance.service.BankService;
 import de.othr.insurance.service.PolicyService;
 import de.othr.insurance.service.PolicyTypeService;
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public class PolicyModel implements Serializable{
     PolicyTypeService poltypeService;
     @Inject
     PolicyTypeConverter polTypeConv;
+    @Inject
+    BankService bank;
     
     private List<Policy> policies;
     private int duration;
@@ -142,7 +145,8 @@ public class PolicyModel implements Serializable{
     }
     
     public Policy createPolicy(){
-        this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstName(),
+        if(bank.doTransfer() != null){
+             this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstName(),
                 custModel.getLastname(),
                 custModel.getIban(),
                 custModel.getStreet(),
@@ -160,6 +164,9 @@ public class PolicyModel implements Serializable{
         this.setItemId(0);
         this.setDuration(0);
         return policy;
+        } else {
+            return null;
+        }  
     }
 
     public String showPolicy(){

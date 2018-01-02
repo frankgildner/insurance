@@ -1,14 +1,11 @@
 package de.othr.insurance.converter;
 
 import de.othr.insurance.entity.Policy;
-import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.service.PolicyService;
-import de.othr.insurance.service.PolicyTypeService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
 

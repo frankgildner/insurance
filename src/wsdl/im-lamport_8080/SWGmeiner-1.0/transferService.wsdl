@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.swgmeiner.gmeiner.oth.de/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="transferService" targetNamespace="http://service.swgmeiner.gmeiner.oth.de/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.swgmeiner.gmeiner.oth.de/" elementFormDefault="unqualified" targetNamespace="http://service.swgmeiner.gmeiner.oth.de/" version="1.0">
+
+  <xs:element name="CreateTransfer" type="tns:CreateTransfer"/>
+
+  <xs:element name="CreateTransferResponse" type="tns:CreateTransferResponse"/>
+
+  <xs:element name="checkIban" type="tns:checkIban"/>
+
+  <xs:element name="checkIbanResponse" type="tns:checkIbanResponse"/>
+
+  <xs:element name="deleteAccount" type="tns:deleteAccount"/>
+
+  <xs:element name="deleteAccountResponse" type="tns:deleteAccountResponse"/>
+
+  <xs:element name="getAccountbyIban" type="tns:getAccountbyIban"/>
+
+  <xs:element name="getAccountbyIbanResponse" type="tns:getAccountbyIbanResponse"/>
+
+  <xs:element name="getTransferbyAccount" type="tns:getTransferbyAccount"/>
+
+  <xs:element name="getTransferbyAccountResponse" type="tns:getTransferbyAccountResponse"/>
+
+  <xs:element name="isTransmitter" type="tns:isTransmitter"/>
+
+  <xs:element name="isTransmitterResponse" type="tns:isTransmitterResponse"/>
+
+  <xs:complexType name="CreateTransfer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element name="arg2" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CreateTransferResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:transfer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transfer">
+    <xs:sequence>
+      <xs:element name="amount" type="xs:double"/>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="receiver" type="tns:account"/>
+      <xs:element minOccurs="0" name="transmitter" type="tns:account"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="account">
+    <xs:sequence>
+      <xs:element name="accountBalance" type="xs:double"/>
+      <xs:element name="accountCode" type="xs:long"/>
+      <xs:element name="accountNr" type="xs:long"/>
+      <xs:element minOccurs="0" name="accountType" type="tns:accountType"/>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="accountType">
+    <xs:sequence>
+      <xs:element name="charges" type="xs:double"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element name="interest" type="xs:double"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:account"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteAccountResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="isTransmitter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:transfer"/>
+      <xs:element minOccurs="0" name="arg1" type="tns:account"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="isTransmitterResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkIban">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkIbanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:customer"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="address" type="tns:address"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="prename" type="xs:string"/>
+      <xs:element minOccurs="0" name="surname" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="city" type="xs:string"/>
+      <xs:element minOccurs="0" name="country" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="postCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="street" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAccountbyIban">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAccountbyIbanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:account"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTransferbyAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:account"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTransferbyAccountResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:anyType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateTransfer">
+    <wsdl:part element="tns:CreateTransfer" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAccountbyIbanResponse">
+    <wsdl:part element="tns:getAccountbyIbanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAccount">
+    <wsdl:part element="tns:deleteAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTransferbyAccountResponse">
+    <wsdl:part element="tns:getTransferbyAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isTransmitter">
+    <wsdl:part element="tns:isTransmitter" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isTransmitterResponse">
+    <wsdl:part element="tns:isTransmitterResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkIban">
+    <wsdl:part element="tns:checkIban" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkIbanResponse">
+    <wsdl:part element="tns:checkIbanResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteAccountResponse">
+    <wsdl:part element="tns:deleteAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateTransferResponse">
+    <wsdl:part element="tns:CreateTransferResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAccountbyIban">
+    <wsdl:part element="tns:getAccountbyIban" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTransferbyAccount">
+    <wsdl:part element="tns:getTransferbyAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="transferService">
+    <wsdl:operation name="CreateTransfer">
+      <wsdl:input message="tns:CreateTransfer" name="CreateTransfer">
+    </wsdl:input>
+      <wsdl:output message="tns:CreateTransferResponse" name="CreateTransferResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAccount">
+      <wsdl:input message="tns:deleteAccount" name="deleteAccount">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteAccountResponse" name="deleteAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isTransmitter">
+      <wsdl:input message="tns:isTransmitter" name="isTransmitter">
+    </wsdl:input>
+      <wsdl:output message="tns:isTransmitterResponse" name="isTransmitterResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkIban">
+      <wsdl:input message="tns:checkIban" name="checkIban">
+    </wsdl:input>
+      <wsdl:output message="tns:checkIbanResponse" name="checkIbanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccountbyIban">
+      <wsdl:input message="tns:getAccountbyIban" name="getAccountbyIban">
+    </wsdl:input>
+      <wsdl:output message="tns:getAccountbyIbanResponse" name="getAccountbyIbanResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransferbyAccount">
+      <wsdl:input message="tns:getTransferbyAccount" name="getTransferbyAccount">
+    </wsdl:input>
+      <wsdl:output message="tns:getTransferbyAccountResponse" name="getTransferbyAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="transferServiceSoapBinding" type="tns:transferService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CreateTransfer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="CreateTransfer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateTransferResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAccount">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteAccount">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isTransmitter">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="isTransmitter">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isTransmitterResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkIban">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkIban">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkIbanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccountbyIban">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAccountbyIban">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAccountbyIbanResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTransferbyAccount">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTransferbyAccount">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTransferbyAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="transferService">
+    <wsdl:port binding="tns:transferServiceSoapBinding" name="transferServicePort">
+      <soap:address location="http://im-lamport:8080/SWGmeiner-1.0/transferService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

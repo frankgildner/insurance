@@ -56,6 +56,7 @@ and open the template in the editor.
                         <label>DamageType</label>
                         <h:selectOneMenu value ="#{damageCaseModel.selectedDamageType}" class="form-control">
                             <f:converter binding="#{damageCaseModel.damTypeConv}"/>
+                            <f:selectItem itemValue="#{null}" itemLabel="--select--" />
                             <f:selectItems value="#{damageCaseModel.damageTypes}" var="damageType" itemLabel="#{damageType.name}"/>
                         </h:selectOneMenu>
                     </div>
@@ -63,8 +64,13 @@ and open the template in the editor.
                         <label>Policy</label>
                         <h:selectOneMenu value ="#{damageCaseModel.selectedPolicy}" class="form-control">
                             <f:converter binding="#{damageCaseModel.policyConv}"/>
-                            <f:selectItems value="#{damageCaseModel.policies}" var="policy" itemLabel="#{policy.policyId}"/>
+                            <f:selectItem itemValue="#{null}" itemLabel="--select--" />
+                            <f:selectItems value="#{damageCaseModel.policies}" var="policy" itemLabel="#{policy.itemID}"/>
                         </h:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <label>Costs</label>
+                        <h:inputText class="form-control" value="#{damageCaseModel.costs}"/>
                     </div>
                     <h:commandButton value="Create DamageCase" class="btn btn-success btn-lg btn-block" action="#{damageCaseModel.createDamageCase()}"/>
                 </h:form>
@@ -83,19 +89,19 @@ and open the template in the editor.
                         <f:facet name="header">
                             Description
                         </f:facet>
-                        <h:outputText value="#{policy.description}"/>
+                        <h:outputText value="#{damageCase.description}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             DamageType
                         </f:facet>
-                        #{policy.damageType} Days
+                        #{damageCase.damageType.name}
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             Costs
                         </f:facet>
-                        #{policy.costs} €
+                        #{damageCase.costs} €
                     </h:column>
                 </h:dataTable>
             </div>  
