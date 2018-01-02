@@ -37,55 +37,57 @@ and open the template in the editor.
 		</div>
 	</nav>
         <div class="container">
-            <h:form>
-                    <div class="form-group">
-                            <label>E-Mail</label>
-                            <h:inputText class="form-control" value="#{customerModel.email}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Firstname</label>
-                            <h:inputText class="form-control" value="#{customerModel.firstname}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Lastname</label>
-                            <h:inputText class="form-control" value="#{customerModel.lastname}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Street</label>
-                            <h:inputText class="form-control" value="#{customerModel.street}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Postcode</label>
-                            <h:inputText class="form-control" value="#{customerModel.postCode}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>City</label>
-                            <h:inputText class="form-control" value="#{customerModel.city}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Country</label>
-                            <h:inputText class="form-control" value="#{customerModel.country}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Password</label>
-                            <h:inputSecret class="form-control"  value="#{customerModel.password}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Password</label>
-                            <h:inputSecret class="form-control" value="#{customerModel.password2}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>IBAN</label>
-                            <h:inputText class="form-control" value="#{customerModel.iban}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Birthday(d-M-yyyy)</label>
-                            <h:inputText class="form-control" value="#{customerModel.birthday}">
-                                <f:convertDateTime pattern="d-M-yyyy" />
-                            </h:inputText>
-                    </div>
-                <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
-            </h:form>
+            <div class="col-md-6 col-md-offset-3">
+                <h:form>
+                        <div class="form-group">
+                                <label>E-Mail</label>
+                                <h:inputText class="form-control" value="#{customerModel.email}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Firstname</label>
+                                <h:inputText class="form-control" value="#{customerModel.firstname}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Lastname</label>
+                                <h:inputText class="form-control" value="#{customerModel.lastname}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Street</label>
+                                <h:inputText class="form-control" value="#{customerModel.street}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Postcode</label>
+                                <h:inputText class="form-control" value="#{customerModel.postCode}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>City</label>
+                                <h:inputText class="form-control" value="#{customerModel.city}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Country</label>
+                                <h:inputText class="form-control" value="#{customerModel.country}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Password</label>
+                                <h:inputSecret class="form-control"  value="#{customerModel.password}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Password</label>
+                                <h:inputSecret class="form-control" value="#{customerModel.password2}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>IBAN</label>
+                                <h:inputText class="form-control" value="#{customerModel.iban}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Birthday(d-M-yyyy)</label>
+                                <h:inputText class="form-control" value="#{customerModel.birthday}">
+                                    <f:convertDateTime pattern="d-M-yyyy" />
+                                </h:inputText>
+                        </div>
+                    <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
+                </h:form>
+            </div>
         </div>
     </h:body>
 </html>
