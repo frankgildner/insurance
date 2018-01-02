@@ -10,6 +10,7 @@ import de.othr.insurance.service.DamageCaseService;
 import de.othr.insurance.service.DamageTypeService;
 import de.othr.insurance.service.PolicyService;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -64,7 +65,13 @@ public class DamageCaseModel implements Serializable {
     }
     public List<Policy> getPoliciesByCustomer(){
         List<Policy> allCustPolicies = polServ.getPoliciesByCustomer(custModel.getCustomer());
-        return allCustPolicies;
+        List<Policy> allCustPoliciesRunning = new ArrayList<Policy>();
+        for(Policy policy: allCustPolicies){
+            if (policy.getStatus().equals("running")){
+                allCustPoliciesRunning.add(policy);
+            }
+        }
+        return allCustPoliciesRunning;
     }
 
     public void setPolicies(List<Policy> policies) {
