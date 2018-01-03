@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.xml.ws.WebServiceRef;
 import de.oth.gmeiner.swgmeiner.service.TransferService;
 import de.oth.gmeiner.swgmeiner.service.Transfer;
+import de.oth.gmeiner.swgmeiner.service.Customer;
 
 @RequestScoped
 @WebService
@@ -16,6 +17,7 @@ public class BankService {
     private TransferService_Service service;
     private TransferService port;
     private Transfer result;
+    private Customer customer;
 
         
     @Transactional
@@ -34,6 +36,17 @@ public class BankService {
             return false;
         } else {
             return true;
+        }
+    }
+    
+    @Transactional
+    public boolean checkIban(String iban){
+        port = service.getTransferServicePort();
+        customer = port.checkIban(iban);
+        if(result != null){
+            return true;
+        } else {
+            return false;
         }
     }
 }
