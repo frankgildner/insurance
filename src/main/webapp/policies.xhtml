@@ -1,130 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Policies</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-        <!-- load fontawesome -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        #{policyModel.init()}
-    </h:head>
-    <h:body>
-        <h:form>
-        <nav class='navbar navbar-default'>
-		<div class='container-fluid'>
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Insurance</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="myNavbar">
-                        <ul class='nav navbar-nav navbar-left'>
-                                    <li><h:link value="Profile" outcome="profile"/></li>
-                                    <li><h:link value="Policies" outcome="policies"/></li>
-                                    <li><h:link value="Damagecases" outcome="damagecases"/></li>
-                                    <li><h:link value="Administration" outcome="administration"/></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a>#{customerModel.firstName}</a></li>
-                                <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
-                            </ul>
-                    </div>
-                    
-		</div>
-	</nav>
-    </h:form>    
-        <div class="container">
-            <div class="col-md-6">
-                <h:form>
-                    <div class="form-group">
-                        <label>Startdate(d-m-yyyy)</label>
-                        <h:inputText class="form-control" value="#{policyModel.startDate}">
-                            <f:convertDateTime pattern="d-M-yyyy" />
-                        </h:inputText>
-                    </div>
-                    <div class="form-group">
-                            <label>Duration</label>
-                            <h:inputText class="form-control" value="#{policyModel.duration}"/>
-                    </div>
-                    <div class="form-group">
-                            <label>Item ID</label>
-                            <h:inputText class="form-control" value="#{policyModel.itemId}"/>
-                    </div>
-                    <div class="form-group">
-                        <label>PolicyType</label>
-                        <h:selectOneMenu value ="#{policyModel.selectedPolicyType}" class="form-control">
-                            <f:converter binding="#{policyModel.polTypeConv}"/>
-                            <f:selectItem itemValue="#{null}" itemLabel="--select--" />
-                            <f:selectItems value="#{policyModel.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
-                        </h:selectOneMenu>
-                    </div>
-                    <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyModel.createPolicy()}"/>
-                </h:form>
+    <ui:composition template="template/template.xhtml">
+        <ui:define name="navigation">
+            <ui:include src="navigation.xhtml">
+            </ui:include>        
+        </ui:define>
+        <ui:define name="pageContent">
+            <div class="container">
+                <div class="col-md-6">
+                    <h:form>
+                        <div class="form-group">
+                            <label>Startdate(d-m-yyyy)</label>
+                            <h:inputText class="form-control" value="#{policyModel.startDate}">
+                                <f:convertDateTime pattern="d-M-yyyy" />
+                            </h:inputText>
+                        </div>
+                        <div class="form-group">
+                                <label>Duration</label>
+                                <h:inputText class="form-control" value="#{policyModel.duration}"/>
+                        </div>
+                        <div class="form-group">
+                                <label>Item ID</label>
+                                <h:inputText class="form-control" value="#{policyModel.itemId}"/>
+                        </div>
+                        <div class="form-group">
+                            <label>PolicyType</label>
+                            <h:selectOneMenu value ="#{policyModel.selectedPolicyType}" class="form-control">
+                                <f:converter binding="#{policyModel.polTypeConv}"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="--select--" />
+                                <f:selectItems value="#{policyModel.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyModel.createPolicy()}"/>
+                    </h:form>
+                </div>
+                <div class="col-md-6">
+                    <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy" border="1">
+                        <h:column>
+                            <f:facet name="header">
+                                Item
+                            </f:facet>
+                            <h:form>
+                                #{policy.itemID}
+                            </h:form>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Start Date
+                            </f:facet>
+                            <h:outputText value="#{policy.startDate}">
+                                <f:convertDateTime pattern="dd.M.yyyy"/>
+                            </h:outputText> 
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Duration
+                            </f:facet>
+                            #{policy.duration} Days
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Price
+                            </f:facet>
+                            #{policy.price} €
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                PolicyTypeId
+                            </f:facet>
+                            #{policy.policyTypeID}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Status
+                            </f:facet>
+                            #{policy.status}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Action
+                            </f:facet>
+                            <h:form>
+                                <h:commandLink value="cancel" action="#{policyModel.cancelPol(policy)}"/>
+                            </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>    
             </div>
-            <div class="col-md-6">
-                <h:dataTable value="#{policyModel.policiesByCustomer}" var="policy" border="1">
-                    <h:column>
-                        <f:facet name="header">
-                            Item
-                        </f:facet>
-                        <h:form>
-                            #{policy.itemID}
-                        </h:form>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Start Date
-                        </f:facet>
-                        <h:outputText value="#{policy.startDate}">
-                            <f:convertDateTime pattern="dd.M.yyyy"/>
-                        </h:outputText> 
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Duration
-                        </f:facet>
-                        #{policy.duration} Days
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Price
-                        </f:facet>
-                        #{policy.price} €
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            PolicyTypeId
-                        </f:facet>
-                        #{policy.policyTypeID}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Status
-                        </f:facet>
-                        #{policy.status}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            Action
-                        </f:facet>
-                        <h:form>
-                            <h:commandLink value="cancel" action="#{policyModel.cancelPol(policy)}"/>
-                        </h:form>
-                    </h:column>
-                </h:dataTable>
-            </div>    
-        </div>
-    </h:body>
-</html>
+        </ui:define>
+    </ui:composition>
+</html> 

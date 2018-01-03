@@ -155,6 +155,7 @@ public class CustomerModel implements Serializable{
     public String logout() {
         HttpSession session = Util.getSession();
         session.invalidate();
+        this.customer = null;
         return "login";
     }
     
@@ -218,6 +219,26 @@ public class CustomerModel implements Serializable{
             // Not all inputs are filled
             FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please fill all inputs!")); 
             return null;
+        }
+    }
+    
+    public boolean adminIsLoggedIn(){
+        if(this.customer != null){
+            if (this.customer.getEmail().equals("admin@admin.de")){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean isLoggedIn(){
+        if(this.customer != null){
+            return true;
+        } else {
+            return false;
         }
     }
 }
