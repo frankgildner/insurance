@@ -148,8 +148,8 @@ public class CustomerModel implements Serializable{
          session.setAttribute("user", this.customer);
          return "profile";
      }  else {
-        //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please try again!"));   
-        return "login";
+        FacesContext.getCurrentInstance().addMessage("loginForm:loginVal",new FacesMessage("Invalid E-Mail or Password! Please try again!"));   
+        return null;
         }
     }
     

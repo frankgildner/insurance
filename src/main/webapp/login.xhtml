@@ -37,7 +37,7 @@ and open the template in the editor.
 	</nav>
         <div class="container">
             <div class="col-md-6 col-md-offset-3">
-                <h:form>
+                <h:form id="loginForm">
                         <div class="form-group">
                                 <label>E-Mail</label>
                                 <h:inputText class="form-control" value="#{customerModel.email}"/>
@@ -46,8 +46,10 @@ and open the template in the editor.
                                 <label>Password</label>
                                 <h:inputSecret class="form-control" value="#{customerModel.password}"/>
                         </div>
-                    <h:commandButton class="btn btn-success btn-lg btn-block" action="#{customerModel.validateCredentials}" type="submit" value="Login"/>
+                    <h:commandButton id="loginVal" class="btn btn-success btn-lg btn-block" action="#{customerModel.validateCredentials}" type="submit" value="Login"/>
+                    <h:message for="loginVal"></h:message>
                 </h:form>
+                
             </div>
         </div>
     </h:body>
