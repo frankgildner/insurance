@@ -38,6 +38,7 @@ and open the template in the editor.
         <div class="container">
             <div class="col-md-6 col-md-offset-3">
                 <h:form id="loginForm">
+                    <h:message style="background-color:red; color:white;margin-bottom:5px;" class="form-control" for="loginVal"></h:message>
                         <div class="form-group">
                                 <label>E-Mail</label>
                                 <h:inputText class="form-control" value="#{customerModel.email}"/>
@@ -47,7 +48,7 @@ and open the template in the editor.
                                 <h:inputSecret class="form-control" value="#{customerModel.password}"/>
                         </div>
                     <h:commandButton id="loginVal" class="btn btn-success btn-lg btn-block" action="#{customerModel.validateCredentials}" type="submit" value="Login"/>
-                    <h:message for="loginVal"></h:message>
+                    
                 </h:form>
                 
             </div>

@@ -5,6 +5,8 @@ import de.othr.insurance.entity.Util;
 import de.othr.insurance.service.CustomerService;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -19,7 +21,7 @@ public class CustomerModel implements Serializable{
     @Inject
     private CustomerService custService;
     
-     private String email;
+    private String email;
     private String firstname;
     private String lastname;
     private String iban;
@@ -31,8 +33,10 @@ public class CustomerModel implements Serializable{
     private String city;
     private String country;
     private Customer customer;
-    private String errorMsg;
-
+    private Pattern pattern;
+    private Matcher matcher;
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    
     public String getFirstname() {
         return firstname;
     }
@@ -112,14 +116,6 @@ public class CustomerModel implements Serializable{
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
     
     public String getFirstName() {
         return this.customer.getPrename();
@@ -160,7 +156,6 @@ public class CustomerModel implements Serializable{
     }
     
     public String signup(){
-        this.errorMsg = "";
         if(!this.email.equals("") && 
             !this.firstname.equals("") && 
             !this.lastname.equals("") &&
@@ -173,7 +168,11 @@ public class CustomerModel implements Serializable{
             !this.city.equals("") &&
             !this.country.equals("")) {
             
-            this.customer = custService.signup(this.email, 
+            pattern = Pattern.compile(EMAIL_PATTERN);
+            matcher = pattern.matcher(this.email);
+            if(matcher.matches()){
+                if(this.password.equals(this.password2)){
+                    this.customer = custService.signup(this.email, 
                     this.firstname, 
                     this.lastname, 
                     this.birthday, 
@@ -183,20 +182,32 @@ public class CustomerModel implements Serializable{
                     this.city, 
                     this.country, 
                     this.password);
-            if(this.customer != null){
-                this.customer = custService.login(customer.getEmail(), customer.getPassword());
-                if(this.customer != null && this.customer.getEmail() != null){
-                    HttpSession session = Util.getSession();
-                    session.setAttribute("user", this.customer);
-                        return "profile";
-                    }  else {   
-                    return "login";
+                    if(this.customer != null){
+                        this.customer = custService.login(customer.getEmail(), customer.getPassword());
+                        if(this.customer != null && this.customer.getEmail() != null){
+                            HttpSession session = Util.getSession();
+                            session.setAttribute("user", this.customer);
+                                return "profile";
+                            }  else {   
+                            return "login";
+                            }
+                    } else {
+                        // Email exists
+                        FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
+                        return null;
                     }
+                } else {
+                    // Passwords do not match
+                    FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Passwords do not match! Please check!"));
+                    return null;
+                }
             } else {
-                FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
+                // Email is not a normal email
+                FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Invalid email format")); 
                 return null;
-            }
+            }          
         } else {
+            // Not all inputs are filled
             FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please fill all inputs!")); 
             return null;
         }
