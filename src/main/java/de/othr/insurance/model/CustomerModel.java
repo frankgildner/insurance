@@ -2,6 +2,7 @@ package de.othr.insurance.model;
 
 import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.Util;
+import de.othr.insurance.service.BankService;
 import de.othr.insurance.service.CustomerService;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpSession;
 public class CustomerModel implements Serializable{
     
     @Inject
-    private CustomerService custService;
+    CustomerService custService;
+    @Inject
+    BankService bankServ;
     
     private String email;
     private String firstname;
@@ -172,28 +175,33 @@ public class CustomerModel implements Serializable{
             matcher = pattern.matcher(this.email);
             if(matcher.matches()){
                 if(this.password.equals(this.password2)){
-                    this.customer = custService.signup(this.email, 
-                    this.firstname, 
-                    this.lastname, 
-                    this.birthday, 
-                    this.iban, 
-                    this.street, 
-                    this.postCode, 
-                    this.city, 
-                    this.country, 
-                    this.password);
-                    if(this.customer != null){
-                        this.customer = custService.login(customer.getEmail(), customer.getPassword());
-                        if(this.customer != null && this.customer.getEmail() != null){
-                            HttpSession session = Util.getSession();
-                            session.setAttribute("user", this.customer);
-                                return "profile";
-                            }  else {   
-                            return "login";
-                            }
+                    if(bankServ.checkIban(this.iban)){
+                       this.customer = custService.signup(this.email, 
+                        this.firstname, 
+                        this.lastname, 
+                        this.birthday, 
+                        this.iban, 
+                        this.street, 
+                        this.postCode, 
+                        this.city, 
+                        this.country, 
+                        this.password);
+                        if(this.customer != null){
+                            this.customer = custService.login(customer.getEmail(), customer.getPassword());
+                            if(this.customer != null && this.customer.getEmail() != null){
+                                HttpSession session = Util.getSession();
+                                session.setAttribute("user", this.customer);
+                                    return "profile";
+                                }  else {   
+                                return "login";
+                                }
+                        } else {
+                            // Email exists
+                            FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
+                            return null;
+                        } 
                     } else {
-                        // Email exists
-                        FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
+                        FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please type in a right IBAN! If you do not have one, please sign up at the bank!"));
                         return null;
                     }
                 } else {

@@ -28,10 +28,6 @@ public class BankService {
         //checkiban(string iban) customer wenn true null wenn nicht vorhanden
         //sender empfänger betrag (empfänger bin immer ich)
          result = port.createTransfer(transmitter, receiver, amount);
-        System.out.println("Result = "+result);
-        System.out.println("transmitter"+transmitter);
-        System.out.println("receiver"+receiver);
-        System.out.println("amount"+amount);
         if(result == null){
             return false;
         } else {
@@ -42,8 +38,9 @@ public class BankService {
     @Transactional
     public boolean checkIban(String iban){
         port = service.getTransferServicePort();
+        System.out.println("iban: "+iban);
         customer = port.checkIban(iban);
-        if(result != null){
+        if(customer != null){
             return true;
         } else {
             return false;
