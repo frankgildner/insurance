@@ -24,6 +24,8 @@ public class PolicyService implements Serializable{
     CustomerService custServ;
     @Inject
     PolicyTypeService polServ;
+    @Inject
+    BankService bank;
     
     @Transactional
     public Policy newPolicy(PolicyApplicationDTO p){
@@ -50,9 +52,15 @@ public class PolicyService implements Serializable{
                 c,
                 p.getPolicyType()
         );
-        entityManager.persist(newP);
-        return newP;
+        String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
+        if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice())) {
+            entityManager.persist(newP);
+            return newP;
+        } else {
+            return null;
+        }
     }
+    
     @Transactional
     public List<Policy> getPoliciesByCustomer(Customer customer){
         long custID = customer.getCustID();

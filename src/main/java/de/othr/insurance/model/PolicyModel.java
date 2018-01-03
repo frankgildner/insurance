@@ -5,6 +5,7 @@ import de.othr.insurance.entity.Policy;
 import de.othr.insurance.entity.PolicyApplicationDTO;
 import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.service.BankService;
+import de.othr.insurance.service.CustomerService;
 import de.othr.insurance.service.PolicyService;
 import de.othr.insurance.service.PolicyTypeService;
 import java.io.Serializable;
@@ -145,7 +146,6 @@ public class PolicyModel implements Serializable{
     }
     
     public Policy createPolicy(){
-        if(bank.doTransfer() != null){
              this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstName(),
                 custModel.getLastname(),
                 custModel.getIban(),
@@ -160,13 +160,13 @@ public class PolicyModel implements Serializable{
                 custModel.getPassword(),
                 custModel.getEmail(),
                 this.getSelectedPolicyType()));
-        
-        this.setItemId(0);
+        if(this.policy != null){
+            this.setItemId(0);
         this.setDuration(0);
         return policy;
         } else {
             return null;
-        }  
+        }     
     }
     
     public String  cancelPol(Policy policy){
