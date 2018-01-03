@@ -2,6 +2,7 @@ package de.othr.insurance.service;
 
 import de.othr.insurance.entity.Address;
 import de.othr.insurance.entity.Customer;
+import helper.BCrypt;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -17,12 +18,14 @@ import javax.transaction.Transactional;
 public class CustomerService {
     @PersistenceContext(unitName="insurancePU")
     private EntityManager entityManager;
+    private static int workload = 12;
     
     @Transactional
     public Customer signup(String email, String firstname, String lastname, Date birthday, String iban, String street, int postCode, String city, String country, String password){
         if(this.getCustomerByEmail(email) != null){
             return null;
         } else {
+            String hashedPW = this.hashPassword(password);
             Customer c = new Customer(email,
                 firstname,
                 lastname, 
@@ -32,7 +35,7 @@ public class CustomerService {
                     country),
                 iban,
                 birthday,
-                password);
+                hashedPW);
         entityManager.persist(c);
         return c;
         }
@@ -48,11 +51,11 @@ public class CustomerService {
             return null;
         } else {
             Customer c = customers.get(0);
-        if(c.getPassword().equals(password)){
-            return c;
-        } else {
-            return null;
-        }
+            if(BCrypt.checkpw(password, c.getPassword())){
+                return c;
+            } else {
+                return null;
+            }
         }
         
     }
@@ -74,5 +77,13 @@ public class CustomerService {
         } else {
             return cust.get(0);
         }
+    }
+    
+    @Transactional
+    public String hashPassword(String password){
+        String salt = BCrypt.gensalt(workload);
+        String hashedPassword = BCrypt.hashpw(password, salt);
+        
+        return hashedPassword;
     }
 }

@@ -178,23 +178,23 @@ public class CustomerModel implements Serializable{
                 if(this.password.equals(this.password2)){
                     if(bankServ.checkIban(this.iban)){
                        this.customer = custService.signup(this.email, 
-                        this.firstname, 
-                        this.lastname, 
-                        this.birthday, 
-                        this.iban, 
-                        this.street, 
-                        this.postCode, 
-                        this.city, 
-                        this.country, 
-                        this.password);
+                            this.firstname, 
+                            this.lastname, 
+                            this.birthday, 
+                            this.iban, 
+                            this.street, 
+                            this.postCode, 
+                            this.city, 
+                            this.country, 
+                            this.password);
                         if(this.customer != null){
-                            this.customer = custService.login(customer.getEmail(), customer.getPassword());
+                            this.customer = custService.login(customer.getEmail(), this.password);
                             if(this.customer != null && this.customer.getEmail() != null){
                                 HttpSession session = Util.getSession();
                                 session.setAttribute("user", this.customer);
                                     return "profile";
                                 }  else {   
-                                return "login";
+                                    return "login";
                                 }
                         } else {
                             // Email exists
@@ -235,10 +235,6 @@ public class CustomerModel implements Serializable{
     }
     
     public boolean isLoggedIn(){
-        if(this.customer != null){
-            return true;
-        } else {
-            return false;
-        }
+        return this.customer != null;
     }
 }
