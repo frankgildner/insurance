@@ -38,7 +38,7 @@ and open the template in the editor.
 	</nav>
         <div class="container">
             <div class="col-md-6 col-md-offset-3">
-                <h:form>
+                <h:form id="registerForm">
                         <div class="form-group">
                                 <label>E-Mail</label>
                                 <h:inputText class="form-control" value="#{customerModel.email}"/>
@@ -85,7 +85,8 @@ and open the template in the editor.
                                     <f:convertDateTime pattern="d-M-yyyy" />
                                 </h:inputText>
                         </div>
-                    <h:commandButton value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
+                    <h:commandButton id="registerVal" value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
+                    <h:message for="registerVal"></h:message>
                 </h:form>
             </div>
         </div>

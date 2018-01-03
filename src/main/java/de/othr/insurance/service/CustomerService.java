@@ -20,7 +20,10 @@ public class CustomerService {
     
     @Transactional
     public Customer signup(String email, String firstname, String lastname, Date birthday, String iban, String street, int postCode, String city, String country, String password){
-        Customer c = new Customer(email,
+        if(this.getCustomerByEmail(email) != null){
+            return null;
+        } else {
+            Customer c = new Customer(email,
                 firstname,
                 lastname, 
                 new Address(street,
@@ -32,6 +35,8 @@ public class CustomerService {
                 password);
         entityManager.persist(c);
         return c;
+        }
+        
     }
     
     @Transactional

@@ -193,11 +193,12 @@ public class CustomerModel implements Serializable{
                     return "login";
                     }
             } else {
-                return "register";
+                FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
+                return null;
             }
         } else {
-            this.errorMsg = "Please fill all inputs!";
-            return "register";
+            FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please fill all inputs!")); 
+            return null;
         }
     }
 }
