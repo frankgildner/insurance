@@ -44,12 +44,17 @@ public class CustomerService {
         Query q = entityManager.createQuery("Select c FROM Customer as c WHERE c.email= :email");
         q.setParameter("email",email);
         List<Customer> customers = q.getResultList();
-        Customer c = customers.get(0);
+        if(customers.isEmpty()){
+            return null;
+        } else {
+            Customer c = customers.get(0);
         if(c.getPassword().equals(password)){
             return c;
         } else {
             return null;
         }
+        }
+        
     }
     
     @Transactional
