@@ -7,6 +7,7 @@ import de.othr.insurance.entity.Policy;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,11 @@ import javax.transaction.Transactional;
 public class DamageCaseService implements Serializable{
     @PersistenceContext(unitName="insurancePU")
     private EntityManager entityManager;
+    
+    @Inject
+    CustomerService custServ;
+    @Inject
+    BankService bank;
     
     @Transactional
     public DamageCase getDamageCase(long damageCaseID){
@@ -39,8 +45,14 @@ public class DamageCaseService implements Serializable{
     @Transactional
     public DamageCase newDamagecase(String description, Policy policy, DamageType damagetype, Customer customer, double costs){
         double selfpart = policy.getPolicyTypeID().getSelfparticipation();
-        DamageCase neu = new DamageCase(description, damagetype, policy, customer,costs, costs*selfpart);
-        entityManager.persist(neu);
-        return neu;
+        DamageCase newDC = new DamageCase(description, damagetype, policy, customer,costs, costs-costs*selfpart);
+        double refund = costs*selfpart;
+        String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
+        if(bank.doTransfer(InsuranceIban, customer.getIban(),refund)) {
+            entityManager.persist(newDC);
+            return newDC;
+        } else {
+            return null;
+        }
     }
 }

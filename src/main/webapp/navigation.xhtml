@@ -25,7 +25,7 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <c:if test="#{customerModel.isLoggedIn()}">
-                                    <li><a>#{customerModel.firstName}</a></li>
+                                    <li><a>logged in as #{customerModel.firstName}</a></li>
                                     <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
                                 </c:if>
                             </ul>
