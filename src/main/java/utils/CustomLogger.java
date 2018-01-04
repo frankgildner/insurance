@@ -2,14 +2,18 @@ package utils;
 
 import de.othr.insurance.service.CustomerService;
 import de.othr.insurance.service.DamageCaseService;
+import de.othr.insurance.service.DamageTypeService;
 import de.othr.insurance.service.PolicyService;
+import de.othr.insurance.service.PolicyTypeService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.qualifiers.OptionCustomer;
 import utils.qualifiers.OptionDamageCase;
+import utils.qualifiers.OptionDamageType;
 import utils.qualifiers.OptionPolicy;
+import utils.qualifiers.OptionPolicyType;
 
 /**
  *
@@ -38,5 +42,19 @@ public class CustomLogger {
     public Logger policyLogger () {  
         return LogManager.getLogger(PolicyService.class); 
     }  
+    
+    @Produces
+    @ApplicationScoped
+    @OptionPolicyType
+    public Logger policyTypeLogger () {  
+        return LogManager.getLogger(PolicyTypeService.class); 
+    }  
+    
+    @Produces
+    @ApplicationScoped
+    @OptionDamageType
+    public Logger damageTypeLogger () {  
+        return LogManager.getLogger(DamageTypeService.class); 
+    } 
     
 }

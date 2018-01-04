@@ -8,6 +8,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionPolicyType;
 
 @RequestScoped
 @WebService
@@ -15,6 +17,10 @@ public class PolicyTypeService implements Serializable{
 
     @Inject
     PolicyTypeRepository ptRep;
+    
+    @Inject
+    @OptionPolicyType
+    private Logger logger;
     
     @Transactional
     public List<PolicyType> getPolicyTypes(){
@@ -29,6 +35,7 @@ public class PolicyTypeService implements Serializable{
     public PolicyType createPolicyType(String name, double selfParticipation, int costsPerDay){
         PolicyType newPT = new PolicyType(name,selfParticipation,costsPerDay);
         ptRep.persist(newPT);
+        logger.info("new policytype created: " + newPT.getName());
         return newPT;
     }
     

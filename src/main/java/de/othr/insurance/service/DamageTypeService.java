@@ -7,6 +7,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionDamageType;
 
 @RequestScoped
 @WebService
@@ -14,6 +16,10 @@ public class DamageTypeService {
     
     @Inject
     DamageTypeRepository dtRep;
+    
+    @Inject
+    @OptionDamageType
+    private Logger logger;
     
     @Transactional
     public List<DamageType> getDamageTypes(){
@@ -28,6 +34,7 @@ public class DamageTypeService {
     public DamageType createDamageType(String name){
         DamageType newDT = new DamageType(name);
         dtRep.persist(newDT);
+        logger.info("new damagetype created: " + newDT.getName());
         return newDT;
     }
 }
