@@ -7,18 +7,34 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Policy extends BaseEntity implements Serializable {
+    @Getter
+    @Setter
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
+    @Getter
+    @Setter
     private int duration;
+    @Getter
+    @Setter
     private double price;
+    @Getter
+    @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Customer custID;
+    @Getter
+    @Setter
     private long itemID;
+    @Getter
+    @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private PolicyType policyTypeID;
+    @Getter
+    @Setter
     private String status;
     
     public Policy() {
@@ -32,62 +48,6 @@ public class Policy extends BaseEntity implements Serializable {
         this.itemID = itemID;
         this.policyTypeID = policyTypeID;
         this.status = "running";
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public long getItemID() {
-        return itemID;
-    }
-
-    public void setItemID(long itemID) {
-        this.itemID = itemID;
-    }
-    
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public Customer getCustID() {
-        return custID;
-    }
-
-    public void setCustID(Customer custID) {
-        this.custID = custID;
-    }
-
-    public PolicyType getPolicyTypeID() {
-        return policyTypeID;
-    }
-
-    public void setPolicyTypeID(PolicyType policyTypeID) {
-        this.policyTypeID = policyTypeID;
     }
 }
 

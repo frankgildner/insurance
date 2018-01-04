@@ -5,17 +5,37 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class DamageCase extends BaseEntity implements Serializable{
+    
+    @Getter
+    @Setter
     private String description;
+    
+    @Getter
+    @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private DamageType damageType;
+    
+    @Getter
+    @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Customer custID;
+    
+    @Getter
+    @Setter
     private double costs;
+    
+    @Getter
+    @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Policy policyNr;
+    
+    @Getter
+    @Setter
     private double refund;
 
     public DamageCase() {
@@ -28,53 +48,5 @@ public class DamageCase extends BaseEntity implements Serializable{
         this.costs = costs;
         this.policyNr = policyNr;
         this.refund = refund;
-    }
-
-    public Policy getPolicyNr() {
-        return policyNr;
-    }
-
-    public void setPolicyNr(Policy policyNr) {
-        this.policyNr = policyNr;
-    }
-
-    public double getRefund() {
-        return refund;
-    }
-
-    public void setRefund(double refund) {
-        this.refund = refund;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public DamageType getDamageType() {
-        return damageType;
-    }
-
-    public void setDamageType(DamageType damageType) {
-        this.damageType = damageType;
-    }
-
-    public Customer getCustID() {
-        return custID;
-    }
-
-    public void setCustID(Customer custID) {
-        this.custID = custID;
-    }
-
-    public double getCosts() {
-        return costs;
-    }
-
-    public void setCosts(double costs) {
-        this.costs = costs;
     }
 }

@@ -4,24 +4,68 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class PolicyApplicationDTO extends BaseEntity implements Serializable{
+    
+    @Getter
+    @Setter
     private String prename;
+    
+    @Getter
+    @Setter
     private String surname;
+    
+    @Getter
+    @Setter
     private String street;
+    
+    @Getter
+    @Setter
     private String city;
+    
+    @Getter
+    @Setter
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthdate;
+    
+    @Getter
+    @Setter
     private long itemID;
+    
+    @Getter
+    @Setter
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
+    
+    @Getter
+    @Setter
     private int duration;
+    
+    @Getter
+    @Setter
     private String password;
+    
+    @Getter
+    @Setter
     private String email;
+    
+    @Getter
+    @Setter
     private String iban;
+    
+    @Getter
+    @Setter
     private int postalCode;
+    
+    @Getter
+    @Setter
     private String country;
+    
+    @Getter
+    @Setter
     private PolicyType policyType;
     
     public PolicyApplicationDTO() {
@@ -42,118 +86,5 @@ public class PolicyApplicationDTO extends BaseEntity implements Serializable{
         this.email = email;
         this.policyType = policyType;
         this.country = country;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getIban() {
-        return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
-    public String getPrename() {
-        return prename;
-    }
-
-    public void setPrename(String prename) {
-        this.prename = prename;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public long getItemID() {
-        return itemID;
-    }
-
-    public void setItemID(long itemID) {
-        this.itemID = itemID;
-    }
-
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public PolicyType getPolicyType() {
-        return policyType;
-    }
-
-    public void setPolicyType(PolicyType policyType) {
-        this.policyType = policyType;
     }
 }
