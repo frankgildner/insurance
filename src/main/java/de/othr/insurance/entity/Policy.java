@@ -5,12 +5,12 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Policy extends BaseEntity implements Serializable {
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
     private int duration;
     private double price;

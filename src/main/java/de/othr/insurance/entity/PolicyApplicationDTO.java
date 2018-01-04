@@ -3,8 +3,7 @@ package de.othr.insurance.entity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity
 public class PolicyApplicationDTO extends BaseEntity implements Serializable{
@@ -12,8 +11,10 @@ public class PolicyApplicationDTO extends BaseEntity implements Serializable{
     private String surname;
     private String street;
     private String city;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthdate;
     private long itemID;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
     private int duration;
     private String password;

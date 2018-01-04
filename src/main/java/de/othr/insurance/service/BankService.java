@@ -21,18 +21,10 @@ public class BankService {
 
         
     @Transactional
-    public boolean doTransfer(String transmitter, String receiver, double amount){
-        // Call Web Service Operation
+    public boolean doTransfer(String transmitter, String receiver, double amount, String purpose){
         port = service.getTransferServicePort();
-        // TODO process result here
-        //checkiban(string iban) customer wenn true null wenn nicht vorhanden
-        //sender empfänger betrag (empfänger bin immer ich)
-         result = port.createTransfer(transmitter, receiver, amount);
-        if(result == null){
-            return false;
-        } else {
-            return true;
-        }
+        result = port.createTransfer(transmitter, receiver, amount, purpose);
+        return result != null;
     }
     
     @Transactional
@@ -40,10 +32,6 @@ public class BankService {
         port = service.getTransferServicePort();
         System.out.println("iban: "+iban);
         customer = port.checkIban(iban);
-        if(customer != null){
-            return true;
-        } else {
-            return false;
-        }
+        return customer != null;
     }
 }

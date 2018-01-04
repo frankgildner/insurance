@@ -6,14 +6,10 @@ import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.entity.PolicyApplicationDTO;
 import de.othr.insurance.repository.PolicyRepository;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.apache.logging.log4j.Logger;
 import utils.qualifiers.OptionPolicy;
@@ -64,7 +60,7 @@ public class PolicyService implements Serializable{
                 p.getPolicyType()
         );
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
-        if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice())) {
+        if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice(),"costs of policy")) {
             polRep.persist(newP);
             logger.info("new policy created: (id)" + newP.getId());
             return newP;

@@ -31,6 +31,7 @@
       <xs:element minOccurs="0" name="arg0" type="xs:string"/>
       <xs:element minOccurs="0" name="arg1" type="xs:string"/>
       <xs:element name="arg2" type="xs:double"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -41,34 +42,51 @@
   </xs:complexType>
 
   <xs:complexType name="transfer">
-    <xs:sequence>
-      <xs:element name="amount" type="xs:double"/>
-      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="id" type="xs:long"/>
-      <xs:element minOccurs="0" name="receiver" type="tns:account"/>
-      <xs:element minOccurs="0" name="transmitter" type="tns:account"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="tns:superEntity">
+        <xs:sequence>
+          <xs:element name="amount" type="xs:double"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="purpose" type="xs:string"/>
+          <xs:element minOccurs="0" name="receiver" type="tns:account"/>
+          <xs:element minOccurs="0" name="transmitter" type="tns:account"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="superEntity">
+    <xs:sequence/>
   </xs:complexType>
 
   <xs:complexType name="account">
-    <xs:sequence>
-      <xs:element name="accountBalance" type="xs:double"/>
-      <xs:element name="accountCode" type="xs:long"/>
-      <xs:element name="accountNr" type="xs:long"/>
-      <xs:element minOccurs="0" name="accountType" type="tns:accountType"/>
-      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
-      <xs:element minOccurs="0" name="iban" type="xs:string"/>
-      <xs:element minOccurs="0" name="id" type="xs:long"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="tns:superEntity">
+        <xs:sequence>
+          <xs:element name="accountBalance" type="xs:double"/>
+          <xs:element name="accountCode" type="xs:long"/>
+          <xs:element name="accountNr" type="xs:long"/>
+          <xs:element minOccurs="0" name="accountType" type="tns:accountType"/>
+          <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="iban" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="accountType">
-    <xs:sequence>
-      <xs:element name="charges" type="xs:double"/>
-      <xs:element minOccurs="0" name="id" type="xs:long"/>
-      <xs:element name="interest" type="xs:double"/>
-      <xs:element minOccurs="0" name="name" type="xs:string"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="tns:superEntity">
+        <xs:sequence>
+          <xs:element name="charges" type="xs:double"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element name="interest" type="xs:double"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="deleteAccount">
@@ -109,25 +127,33 @@
   </xs:complexType>
 
   <xs:complexType name="customer">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="address" type="tns:address"/>
-      <xs:element minOccurs="0" name="email" type="xs:string"/>
-      <xs:element minOccurs="0" name="id" type="xs:long"/>
-      <xs:element minOccurs="0" name="password" type="xs:string"/>
-      <xs:element minOccurs="0" name="prename" type="xs:string"/>
-      <xs:element minOccurs="0" name="surname" type="xs:string"/>
-      <xs:element minOccurs="0" name="username" type="xs:string"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="tns:superEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="address" type="tns:address"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+          <xs:element minOccurs="0" name="prename" type="xs:string"/>
+          <xs:element minOccurs="0" name="surname" type="xs:string"/>
+          <xs:element minOccurs="0" name="username" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="address">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="city" type="xs:string"/>
-      <xs:element minOccurs="0" name="country" type="xs:string"/>
-      <xs:element minOccurs="0" name="id" type="xs:long"/>
-      <xs:element minOccurs="0" name="postCode" type="xs:string"/>
-      <xs:element minOccurs="0" name="street" type="xs:string"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="tns:superEntity">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="city" type="xs:string"/>
+          <xs:element minOccurs="0" name="country" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="postCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="street" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="getAccountbyIban">

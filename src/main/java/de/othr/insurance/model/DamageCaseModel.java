@@ -65,7 +65,7 @@ public class DamageCaseModel implements Serializable {
     }
     public List<Policy> getPoliciesByCustomer(){
         List<Policy> allCustPolicies = polServ.getPoliciesByCustomer(custModel.getCustomer());
-        List<Policy> allCustPoliciesRunning = new ArrayList<Policy>();
+        List<Policy> allCustPoliciesRunning = new ArrayList<>();
         for(Policy policy: allCustPolicies){
             if (policy.getStatus().equals("running")){
                 allCustPoliciesRunning.add(policy);

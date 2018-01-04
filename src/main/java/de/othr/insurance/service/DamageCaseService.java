@@ -10,9 +10,6 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.apache.logging.log4j.Logger;
 import utils.qualifiers.OptionDamageCase;
@@ -50,12 +47,12 @@ public class DamageCaseService implements Serializable{
         DamageCase newDC = new DamageCase(description, damagetype, policy, customer,costs, costs-costs*selfpart);
         double refund = costs*selfpart;
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
-        if(bank.doTransfer(InsuranceIban, customer.getIban(),refund)) {
+        if(!bank.doTransfer(InsuranceIban, customer.getIban(),refund,"refund of damagecase")) {
+            return null;
+        } else {
             dcRep.persist(newDC);
             logger.info("new Damagecase created: " + newDC.getDescription());
             return newDC;
-        } else {
-            return null;
         }
     }
 }

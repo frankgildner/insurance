@@ -22,7 +22,11 @@ public class CustomerRepository extends SingleIdEntityRepository<Customer>{
     public Customer findByEmail(String email){
         Query q = this.getEntityManager().createQuery("Select c FROM Customer as c WHERE c.email= :email");
         q.setParameter("email",email);
-        Customer customer = (Customer) q.getSingleResult();
-        return customer;
+        List<Customer> customers = q.getResultList();
+        if (customers.isEmpty()){
+            return null;
+        } else {
+            return customers.get(0);
+        }
     }
 }

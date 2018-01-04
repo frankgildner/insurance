@@ -42,7 +42,6 @@ public class CustomerService {
                 birthday,
                 hashedPW);
         custRep.persist(c);
-        
         logger.info("new user created: " + c.getEmail());
         
         return c;

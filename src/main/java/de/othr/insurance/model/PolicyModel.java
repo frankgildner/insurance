@@ -5,7 +5,6 @@ import de.othr.insurance.entity.Policy;
 import de.othr.insurance.entity.PolicyApplicationDTO;
 import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.service.BankService;
-import de.othr.insurance.service.CustomerService;
 import de.othr.insurance.service.PolicyService;
 import de.othr.insurance.service.PolicyTypeService;
 import java.io.Serializable;
