@@ -4,6 +4,7 @@ import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.Policy;
 import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.entity.PolicyApplicationDTO;
+import de.othr.insurance.repository.PolicyRepository;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,17 +21,22 @@ import utils.qualifiers.OptionPolicy;
 @RequestScoped
 @WebService
 public class PolicyService implements Serializable{
-    @PersistenceContext(unitName="insurancePU")
-    private EntityManager entityManager;
+
     @Inject
     CustomerService custServ;
+    
     @Inject
     PolicyTypeService polServ;
+    
     @Inject
     BankService bank;
+    
     @Inject
     @OptionPolicy
     private Logger logger;
+    
+    @Inject
+    PolicyRepository polRep;
     
     @Transactional
     public Policy newPolicy(PolicyApplicationDTO p){
@@ -59,7 +65,7 @@ public class PolicyService implements Serializable{
         );
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
         if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice())) {
-            entityManager.persist(newP);
+            polRep.persist(newP);
             logger.info("new policy created: (id)" + newP.getId());
             return newP;
         } else {
@@ -69,11 +75,9 @@ public class PolicyService implements Serializable{
     
     @Transactional
     public List<Policy> getPoliciesByCustomer(Customer customer){
-        Query q = entityManager.createQuery("Select p FROM Policy as p WHERE p.custID= :customer",Policy.class);
-        q.setParameter("customer",customer);
-        List<Policy> policies = q.getResultList();
-        return policies;
+       return polRep.getPoliciesByCustomer(customer);
     }
+    
     @Transactional
     public double calculatePrice(int duration, PolicyType polType){
         double price = duration*polType.getPricePerDay();
@@ -85,17 +89,17 @@ public class PolicyService implements Serializable{
     }
     @Transactional
     public void cancelPolicy(Policy policy){
-        Policy p = entityManager.find(Policy.class,policy.getId());
+        Policy p = polRep.findById(policy.getId());
         p.setStatus("canceled");
     }
+    
     @Transactional
     public Policy getPolicy(long policyID){
-        Policy p = entityManager.find(Policy.class,policyID);
-        return p;
+        return polRep.findById(policyID);
     }
+    
     @Transactional
     public Policy getPolicyById(long policyID){
-        Policy p = entityManager.find(Policy.class,policyID);
-        return p;
+        return polRep.findById(policyID);
     }
 }

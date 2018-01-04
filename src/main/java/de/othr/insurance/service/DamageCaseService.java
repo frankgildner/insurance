@@ -4,6 +4,7 @@ import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.DamageCase;
 import de.othr.insurance.entity.DamageType;
 import de.othr.insurance.entity.Policy;
+import de.othr.insurance.repository.DamageCaseRepository;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -19,32 +20,28 @@ import utils.qualifiers.OptionDamageCase;
 @RequestScoped
 @WebService
 public class DamageCaseService implements Serializable{
-    @PersistenceContext(unitName="insurancePU")
-    private EntityManager entityManager;
     
     @Inject
     CustomerService custServ;
+    
     @Inject
     BankService bank;
+    
     @Inject
     @OptionDamageCase
     private Logger logger;
     
+    @Inject
+    DamageCaseRepository dcRep;
+    
     @Transactional
     public DamageCase getDamageCase(long damageCaseID){
-        Query q = entityManager.createQuery("Select dc FROM DamageCase as dc WHERE dc.damageCaseId= :damageCaseId");
-        q.setParameter("damageCaseId", damageCaseID);
-        List<DamageCase> damageCases = q.getResultList();
-        DamageCase dc = damageCases.get(0);
-        return dc;
+        return dcRep.findById(damageCaseID);
     }
     
     @Transactional
     public List<DamageCase> getDamageCaseByCustomer (Customer customer){
-        Query q = entityManager.createQuery("Select dc FROM DamageCase as dc WHERE dc.custID = :customer",DamageCase.class);
-        q.setParameter("customer", customer);
-        List<DamageCase> damageCases = q.getResultList();
-        return damageCases;
+        return dcRep.getDamageCaseByCustomer(customer);
     }
 
     @Transactional
@@ -54,7 +51,7 @@ public class DamageCaseService implements Serializable{
         double refund = costs*selfpart;
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
         if(bank.doTransfer(InsuranceIban, customer.getIban(),refund)) {
-            entityManager.persist(newDC);
+            dcRep.persist(newDC);
             logger.info("new Damagecase created: " + newDC.getDescription());
             return newDC;
         } else {

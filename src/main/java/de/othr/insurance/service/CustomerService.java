@@ -2,16 +2,12 @@ package de.othr.insurance.service;
 
 import de.othr.insurance.entity.Address;
 import de.othr.insurance.entity.Customer;
+import de.othr.insurance.repository.CustomerRepository;
 import utils.BCrypt;
 import java.util.Date;
-import java.util.List;
-import java.util.Random;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.apache.logging.log4j.Logger;
 import utils.qualifiers.OptionCustomer;
@@ -19,9 +15,11 @@ import utils.qualifiers.OptionCustomer;
 @RequestScoped
 @WebService
 public class CustomerService {
-    @PersistenceContext(unitName="insurancePU")
-    private EntityManager entityManager;
-    private static int workload = 12;
+    
+    private static final int workload = 12;
+    
+    @Inject
+    private CustomerRepository custRep;
     
     @Inject
     @OptionCustomer
@@ -43,7 +41,7 @@ public class CustomerService {
                 iban,
                 birthday,
                 hashedPW);
-        entityManager.persist(c);
+        custRep.persist(c);
         
         logger.info("new user created: " + c.getEmail());
         
@@ -54,13 +52,10 @@ public class CustomerService {
     
     @Transactional
     public Customer login(String email, String password){
-        Query q = entityManager.createQuery("Select c FROM Customer as c WHERE c.email= :email");
-        q.setParameter("email",email);
-        List<Customer> customers = q.getResultList();
-        if(customers.isEmpty()){
+        Customer c = custRep.findByEmail(email);
+        if(c == null){
             return null;
         } else {
-            Customer c = customers.get(0);
             if(BCrypt.checkpw(password, c.getPassword())){
                 return c;
             } else {
@@ -72,22 +67,14 @@ public class CustomerService {
     
     @Transactional
     public String deleteCustomer(Customer customer){
-        Customer c = entityManager.find(Customer.class,customer.getId());
-        entityManager.remove(c);
+        custRep.remove(customer.getId());
         logger.info("user successfully deleted");
         return "Customer successfully deleted";
     }
     
     @Transactional
     public Customer getCustomerByEmail(String email){
-        Query q = entityManager.createQuery("Select c from Customer as c where c.email = :email");
-        q.setParameter("email", email);
-        List<Customer> cust = q.getResultList();
-        if(cust.isEmpty()){
-            return null;
-        } else {
-            return cust.get(0);
-        }
+        return custRep.findByEmail(email);
     }
     
     /*
