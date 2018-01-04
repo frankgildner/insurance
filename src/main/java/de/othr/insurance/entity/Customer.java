@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
 
 @Entity
 public class Customer extends BaseEntity implements Serializable{
@@ -12,6 +13,7 @@ public class Customer extends BaseEntity implements Serializable{
     @Embedded
     private Address address;
     private String iban;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthday;
     private String password;
     private String email;
