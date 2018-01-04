@@ -25,7 +25,7 @@
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <c:if test="#{customerBean.isLoggedIn()}">
-                                    <li><a>logged in as #{customerBean.customer.prename}</a></li>
+                                    <li><a>logged in as #{customerBean.customer.surname}, #{customerBean.customer.prename}</a></li>
                                     <li><h:commandLink value="Logout" action="#{customerBean.logout()}"/></li>
                                 </c:if>
                             </ul>

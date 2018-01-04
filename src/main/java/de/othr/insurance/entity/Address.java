@@ -19,6 +19,13 @@ public class Address implements Serializable {
         this.city = city;
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return street +", "+ postCode + " "+ city + ", " + country;
+    }
+    
+    
     
     
 }

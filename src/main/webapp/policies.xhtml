@@ -13,8 +13,7 @@
             </ui:include>        
         </ui:define>
         <ui:define name="pageContent">
-            <div class="container">
-                <div class="col-md-6">
+                <div class="col-md-4 col-md-offset-1">
                     <h:form>
                         <div class="form-group">
                             <label>Startdate(d-m-yyyy)</label>
@@ -42,18 +41,18 @@
                     </h:form>
                 </div>
                 <div class="col-md-6">
-                    <h:dataTable value="#{policyBean.policiesByCustomer}" var="policy" border="1">
+                    <h:dataTable value="#{policyBean.policiesByCustomer}" class="table table-striped table-bordered dt-responsive nowrap" var="policy" border="1">
                         <h:column>
                             <f:facet name="header">
                                 Item
                             </f:facet>
                             <h:form>
-                                #{policy.itemID}
+                                <h:outputText value="#{policy.itemID}"/>
                             </h:form>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Start Date
+                                Startdate
                             </f:facet>
                             <h:outputText value="#{policy.startDate}">
                                 <f:convertDateTime pattern="dd.M.yyyy"/>
@@ -63,25 +62,25 @@
                             <f:facet name="header">
                                 Duration
                             </f:facet>
-                            #{policy.duration} Days
+                            <h:outputText value="#{policy.duration} Days"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Price
                             </f:facet>
-                            #{policy.price} €
+                            <h:outputText value="#{policy.price} €"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                PolicyTypeId
+                                PolicyType
                             </f:facet>
-                            #{policy.policyTypeID}
+                            <h:outputText value="#{policy.policyTypeID}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 Status
                             </f:facet>
-                            #{policy.status}
+                            <h:outputText value="#{policy.status}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -93,7 +92,6 @@
                         </h:column>
                     </h:dataTable>
                 </div>    
-            </div>
         </ui:define>
     </ui:composition>
 </html> 
