@@ -15,6 +15,8 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @SessionScoped
@@ -22,47 +24,52 @@ public class DamageCaseModel implements Serializable {
     
     @Inject 
     CustomerModel custModel;
-    @Inject 
+    @Inject   
     DamageTypeService damTypeServ;
     @Inject
+    @Getter
+    @Setter
     DamageTypeConverter damTypeConv;
     @Inject
     DamageCaseService damCaseServ;
     @Inject
+    @Getter
+    @Setter        
     PolicyConverter policyConv;
     @Inject
     PolicyService polServ;
     
+    @Getter
+    @Setter
     private String description;
+    @Getter
+    @Setter
     private DamageType damType;
+    @Getter
+    @Setter
     private List<DamageType> damageTypes;
+    @Getter
+    @Setter
     private DamageType selectedDamageType;
+    @Getter
+    @Setter
     private Customer custID;
+    @Getter
+    @Setter
     private double costs;
+    @Getter
+    @Setter
     private List<DamageCase> damageCases;
+    @Getter
+    @Setter
     private DamageCase damageCase;
+    @Getter
+    @Setter
     private Policy selectedPolicy;
+    @Getter
+    @Setter
     private List<Policy> policies;
 
-    public PolicyConverter getPolicyConv() {
-        return policyConv;
-    }
-
-    public void setPolicyConv(PolicyConverter policyConv) {
-        this.policyConv = policyConv;
-    }
-
-    public Policy getSelectedPolicy() {
-        return selectedPolicy;
-    }
-
-    public void setSelectedPolicy(Policy selectedPolicy) {
-        this.selectedPolicy = selectedPolicy;
-    }
-
-    public List<Policy> getPolicies() {
-       return policies;
-    }
     public List<Policy> getPoliciesByCustomer(){
         List<Policy> allCustPolicies = polServ.getPoliciesByCustomer(custModel.getCustomer());
         List<Policy> allCustPoliciesRunning = new ArrayList<>();
@@ -74,74 +81,6 @@ public class DamageCaseModel implements Serializable {
         return allCustPoliciesRunning;
     }
 
-    public void setPolicies(List<Policy> policies) {
-        this.policies = policies;
-    }
-
-    public List<DamageCase> getDamageCases() {
-        return damageCases;
-    }
-
-    public void setDamageCases(List<DamageCase> damageCases) {
-        this.damageCases = damageCases;
-    }
-
-    public DamageCase getDamageCase() {
-        return damageCase;
-    }
-
-    public void setDamageCase(DamageCase damageCase) {
-        this.damageCase = damageCase;
-    }
-
-    public DamageType getSelectedDamageType() {
-        return selectedDamageType;
-    }
-
-    public void setSelectedDamageType(DamageType selectedDamageType) {
-        this.selectedDamageType = selectedDamageType;
-    }
-    
-    public DamageTypeConverter getDamTypeConv() {
-        return damTypeConv;
-    }
-
-    public void setDamTypeConv(DamageTypeConverter damTypeConv) {
-        this.damTypeConv = damTypeConv;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public DamageType getDamType() {
-        return damType;
-    }
-
-    public void setDamType(DamageType damType) {
-        this.damType = damType;
-    }
-
-    public Customer getCustID() {
-        return custID;
-    }
-
-    public void setCustID(Customer custID) {
-        this.custID = custID;
-    }
-
-    public double getCosts() {
-        return costs;
-    }
-
-    public void setCosts(double costs) {
-        this.costs = costs;
-    }
-    
     public List<DamageType> getDamageTypes(){
         List<DamageType> allDT = damTypeServ.getDamageTypes();
         return allDT;

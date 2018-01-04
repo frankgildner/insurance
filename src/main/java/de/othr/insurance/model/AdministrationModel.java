@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @SessionScoped
@@ -18,68 +20,30 @@ public class AdministrationModel implements Serializable {
     @Inject
     DamageTypeService damTypeService;
     
+    @Getter
+    @Setter
     private String policyTypeName;
+    
+    @Getter
+    @Setter
     private double selfpart;
+    
+    @Getter
+    @Setter
     private int costsPerDay;
+    
+    @Getter
+    @Setter
     private PolicyType polType;
+    
+    @Getter
+    @Setter
     private String damageTypeName;
+    
+    @Getter
+    @Setter
     private DamageType damType;
 
-    public DamageType getDamType() {
-        return damType;
-    }
-
-    public void setDamType(DamageType damType) {
-        this.damType = damType;
-    }
-
-    public String getPolicyTypeName() {
-        return policyTypeName;
-    }
-
-    public void setPolicyTypeName(String policyTypeName) {
-        this.policyTypeName = policyTypeName;
-    }
-
-    public String getDamageTypeName() {
-        return damageTypeName;
-    }
-
-    public void setDamageTypeName(String damageTypeName) {
-        this.damageTypeName = damageTypeName;
-    }
-    
-    public PolicyTypeService getPoltypeService() {
-        return poltypeService;
-    }
-
-    public void setPoltypeService(PolicyTypeService poltypeService) {
-        this.poltypeService = poltypeService;
-    }
-
-    public double getSelfpart() {
-        return selfpart;
-    }
-
-    public void setSelfpart(double selfpart) {
-        this.selfpart = selfpart;
-    }
-
-    public int getCostsPerDay() {
-        return costsPerDay;
-    }
-
-    public void setCostsPerDay(int costsPerDay) {
-        this.costsPerDay = costsPerDay;
-    }
-
-    public PolicyType getPolType() {
-        return polType;
-    }
-
-    public void setPolType(PolicyType polType) {
-        this.polType = polType;
-    }
     
     public PolicyType createPolicyType(){
         if(!this.policyTypeName.equals("") &&

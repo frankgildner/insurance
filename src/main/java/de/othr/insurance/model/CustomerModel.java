@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @SessionScoped
@@ -24,121 +26,51 @@ public class CustomerModel implements Serializable{
     @Inject
     BankService bankServ;
     
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String firstname;
+    @Getter
+    @Setter
     private String lastname;
+    @Getter
+    @Setter
     private String iban;
+    @Getter
+    @Setter
     private String password;
+    @Getter
+    @Setter
     private String password2;
+    @Getter
+    @Setter
     private Date birthday;
+    @Getter
+    @Setter
     private String street;
+    @Getter
+    @Setter
     private int postCode;
+    @Getter
+    @Setter
     private String city;
+    @Getter
+    @Setter
     private String country;
+    @Getter
+    @Setter
     private Customer customer;
+    @Getter
+    @Setter
     private Pattern pattern;
+    @Getter
+    @Setter
     private Matcher matcher;
+    @Getter
+    @Setter
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getIban() {
-        return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(int postCode) {
-        this.postCode = postCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    
-    public String getFirstName() {
-        return this.customer.getPrename();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
     
     public String validateCredentials(){
      this.customer = custService.login(email, password);

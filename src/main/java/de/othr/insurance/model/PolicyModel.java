@@ -15,6 +15,8 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.faces.component.html.HtmlInputHidden;
 import javax.inject.Inject;
 import javax.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
 
 @Named
 @SessionScoped
@@ -26,126 +28,58 @@ public class PolicyModel implements Serializable{
     @Inject 
     PolicyTypeService poltypeService;
     @Inject
+    @Getter
+    @Setter
     PolicyTypeConverter polTypeConv;
     @Inject
     BankService bank;
     
+    @Getter
+    @Setter
     private List<Policy> policies;
+    @Getter
+    @Setter
     private int duration;
+    @Getter
+    @Setter
     private long itemId;
+    @Getter
+    @Setter
     private PolicyType policyType;
+    @Getter
+    @Setter
     private List<PolicyType> policyTypes;
+    @Getter
+    @Setter
     private PolicyType selectedPolicyType;
+    @Getter
+    @Setter
     private Policy policy;
+    @Getter
+    @Setter
     private Date startDate;
+    @Getter
+    @Setter
     private Policy pol;
+    @Getter
+    @Setter
     private HtmlDataTable dataTable;
+    @Getter
+    @Setter
     private HtmlInputHidden dataItemId = new HtmlInputHidden(); 
 
-    public HtmlInputHidden getDataItemId() {
-        return dataItemId;
-    }
-
-    public void setDataItemId(HtmlInputHidden dataItemId) {
-        this.dataItemId = dataItemId;
-    }
-
-    public Policy getPol() {
-        return pol;
-    }
-
-    public void setPol(Policy pol) {
-        this.pol = pol;
-    }
-
-    public HtmlDataTable getDataTable() {
-        return dataTable;
-    }
-
-    public void setDataTable(HtmlDataTable dataTable) {
-        this.dataTable = dataTable;
-    }
-
-    public PolicyTypeConverter getPolTypeConv() {
-        return polTypeConv;
-    }
-
-    public void setPolTypeConv(PolicyTypeConverter polTypeConv) {
-        this.polTypeConv = polTypeConv;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Policy getPolicy() {
-        return policy;
-    }
-
-    public void setPolicy(Policy policy) {
-        this.policy = policy;
-    }
-
-    public List<Policy> getPolicies() {
-        return policies;
-    }
-
-    public void setPolicies(List<Policy> policies) {
-        this.policies = policies;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(long itemId) {
-        this.itemId = itemId;
-    }
-
-    public PolicyType getPolicyType() {
-        return policyType;
-    }
-
-    public void setPolicyType(PolicyType policyType) {
-        this.policyType = policyType;
-    }
-
-    public PolicyType getSelectedPolicyType() {
-        return selectedPolicyType;
-    }
-
-    public void setSelectedPolicyType(PolicyType selectedPolicyType) {
-        this.selectedPolicyType = selectedPolicyType;
-    }
-    
-    public void init(){
-        this.policyTypes = this.getPolicyTypes();
-    }
-    
     public List<Policy> getPoliciesByCustomer(){
         this.policies = polService.getPoliciesByCustomer(custModel.getCustomer());
         return policies;
     }
     
     public List<PolicyType> getPolicyTypes(){
-        List<PolicyType> x = poltypeService.getPolicyTypes();
-        return x;
+        List<PolicyType> polTypes = poltypeService.getPolicyTypes();
+        return polTypes;
     }
     
     public Policy createPolicy(){
-             this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstName(),
+             this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstname(),
                 custModel.getLastname(),
                 custModel.getIban(),
                 custModel.getStreet(),
@@ -171,5 +105,9 @@ public class PolicyModel implements Serializable{
     public String  cancelPol(Policy policy){
         polService.cancelPolicy(policy);
         return "policies";
+    }
+    
+    public void init(){
+        this.policyTypes = this.getPolicyTypes();
     }
 }
