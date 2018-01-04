@@ -1,4 +1,4 @@
-package de.othr.insurance.model;
+package de.othr.insurance.bean;
 
 import de.othr.insurance.converter.DamageTypeConverter;
 import de.othr.insurance.converter.PolicyConverter;
@@ -20,52 +20,66 @@ import lombok.Setter;
 
 @Named
 @SessionScoped
-public class DamageCaseModel implements Serializable {
+public class DamageCaseBean implements Serializable {
     
     @Inject 
-    CustomerModel custModel;
+    CustomerBean custModel;
+    
     @Inject   
     DamageTypeService damTypeServ;
+    
     @Inject
     @Getter
     @Setter
     DamageTypeConverter damTypeConv;
+    
     @Inject
     DamageCaseService damCaseServ;
+    
     @Inject
     @Getter
     @Setter        
     PolicyConverter policyConv;
+    
     @Inject
     PolicyService polServ;
     
     @Getter
     @Setter
     private String description;
+    
     @Getter
     @Setter
     private DamageType damType;
+    
     @Getter
     @Setter
     private List<DamageType> damageTypes;
+    
     @Getter
     @Setter
     private DamageType selectedDamageType;
+    
     @Getter
     @Setter
     private Customer custID;
+    
     @Getter
     @Setter
     private double costs;
+    
     @Getter
     @Setter
     private List<DamageCase> damageCases;
+    
     @Getter
     @Setter
     private DamageCase damageCase;
+    
     @Getter
     @Setter
     private Policy selectedPolicy;
+    
     @Getter
     @Setter
     private List<Policy> policies;
@@ -102,7 +116,6 @@ public class DamageCaseModel implements Serializable {
                 this.selectedPolicy, 
                 this.selectedDamageType, 
                 custModel.getCustomer(), 
-                //TODO
                 this.costs);
         this.description = "";
         this.selectedDamageType = null;

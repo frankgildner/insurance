@@ -1,4 +1,4 @@
-package de.othr.insurance.model;
+package de.othr.insurance.bean;
 
 import de.othr.insurance.converter.PolicyTypeConverter;
 import de.othr.insurance.entity.Policy;
@@ -20,50 +20,64 @@ import lombok.Setter;
 
 @Named
 @SessionScoped
-public class PolicyModel implements Serializable{
+public class PolicyBean implements Serializable{
+    
     @Inject
     PolicyService polService;
+    
     @Inject
-    CustomerModel custModel;
+    CustomerBean custModel;
+    
     @Inject 
     PolicyTypeService poltypeService;
+    
     @Inject
     @Getter
     @Setter
     PolicyTypeConverter polTypeConv;
+    
     @Inject
     BankService bank;
     
     @Getter
     @Setter
     private List<Policy> policies;
+    
     @Getter
     @Setter
     private int duration;
+    
     @Getter
     @Setter
     private long itemId;
+    
     @Getter
     @Setter
     private PolicyType policyType;
-    @Getter
+    
     @Setter
     private List<PolicyType> policyTypes;
+    
     @Getter
     @Setter
     private PolicyType selectedPolicyType;
+    
     @Getter
     @Setter
     private Policy policy;
+    
     @Getter
     @Setter
     private Date startDate;
+    
     @Getter
     @Setter
     private Policy pol;
+    
     @Getter
     @Setter
     private HtmlDataTable dataTable;
+    
     @Getter
     @Setter
     private HtmlInputHidden dataItemId = new HtmlInputHidden(); 

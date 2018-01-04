@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <f:metadata>
-        <f:viewAction action="#{damageCaseModel.init()}" />
+        <f:viewAction action="#{damageCaseBean.init()}" />
     </f:metadata>
     <ui:composition template="template/template.xhtml">
         <ui:define name="navigation">
@@ -18,33 +18,33 @@
                 <h:form>
                     <div class="form-group">
                         <label>Description</label>
-                        <h:inputTextarea class="form-control" value="#{damageCaseModel.description}"/>
+                        <h:inputTextarea class="form-control" value="#{damageCaseBean.description}"/>
                     </div>
                     <div class="form-group">
                         <label>DamageType</label>
-                        <h:selectOneMenu value ="#{damageCaseModel.selectedDamageType}" class="form-control">
-                            <f:converter binding="#{damageCaseModel.damTypeConv}"/>
+                        <h:selectOneMenu value ="#{damageCaseBean.selectedDamageType}" class="form-control">
+                            <f:converter binding="#{damageCaseBean.damTypeConv}"/>
                             <f:selectItem itemValue="#{null}" itemLabel="--select--" />
-                            <f:selectItems value="#{damageCaseModel.damageTypes}" var="damageType" itemLabel="#{damageType.name}"/>
+                            <f:selectItems value="#{damageCaseBean.damageTypes}" var="damageType" itemLabel="#{damageType.name}"/>
                         </h:selectOneMenu>
                     </div>
                     <div class="form-group">
                         <label>Policy</label>
-                        <h:selectOneMenu value ="#{damageCaseModel.selectedPolicy}" class="form-control">
-                            <f:converter binding="#{damageCaseModel.policyConv}"/>
+                        <h:selectOneMenu value ="#{damageCaseBean.selectedPolicy}" class="form-control">
+                            <f:converter binding="#{damageCaseBean.policyConv}"/>
                             <f:selectItem itemValue="#{null}" itemLabel="--select--" />
-                            <f:selectItems value="#{damageCaseModel.policies}" var="policy" itemLabel="#{policy.itemID}"/>
+                            <f:selectItems value="#{damageCaseBean.policies}" var="policy" itemLabel="#{policy.itemID}"/>
                         </h:selectOneMenu>
                     </div>
                     <div class="form-group">
                         <label>Costs</label>
-                        <h:inputText class="form-control" value="#{damageCaseModel.costs}"/>
+                        <h:inputText class="form-control" value="#{damageCaseBean.costs}"/>
                     </div>
-                    <h:commandButton value="Create DamageCase" class="btn btn-success btn-lg btn-block" action="#{damageCaseModel.createDamageCase()}"/>
+                    <h:commandButton value="Create DamageCase" class="btn btn-success btn-lg btn-block" action="#{damageCaseBean.createDamageCase()}"/>
                 </h:form>
             </div>
             <div class="col-md-6">
-                <h:dataTable value="#{damageCaseModel.damageCaseByCustomer}" var="damageCase" border="1">
+                <h:dataTable value="#{damageCaseBean.damageCaseByCustomer}" var="damageCase" border="1">
                     <h:column>
                         <f:facet name="header">
                             ID

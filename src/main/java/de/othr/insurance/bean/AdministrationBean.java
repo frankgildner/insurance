@@ -1,4 +1,4 @@
-package de.othr.insurance.model;
+package de.othr.insurance.bean;
 
 import de.othr.insurance.entity.DamageType;
 import de.othr.insurance.entity.PolicyType;
@@ -13,10 +13,11 @@ import lombok.Setter;
 
 @Named
 @SessionScoped
-public class AdministrationModel implements Serializable {
+public class AdministrationBean implements Serializable {
     
     @Inject 
     PolicyTypeService poltypeService;
+    
     @Inject
     DamageTypeService damTypeService;
     

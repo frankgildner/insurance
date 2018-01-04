@@ -12,27 +12,34 @@ import lombok.Setter;
 
 @Entity
 public class Policy extends BaseEntity implements Serializable {
+    
     @Getter
     @Setter
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
+    
     @Getter
     @Setter
     private int duration;
+    
     @Getter
     @Setter
     private double price;
+    
     @Getter
     @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private Customer custID;
+    
     @Getter
     @Setter
     private long itemID;
+    
     @Getter
     @Setter
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private PolicyType policyTypeID;
+    
     @Getter
     @Setter
     private String status;

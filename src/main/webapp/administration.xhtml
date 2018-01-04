@@ -14,26 +14,26 @@
                 <h:form>
                         <div class="form-group">
                                 <label>Name</label>
-                                <h:inputText class="form-control" value="#{administrationModel.policyTypeName}"/>
+                                <h:inputText class="form-control" value="#{administrationBean.policyTypeName}"/>
                         </div>
                         <div class="form-group">
                                 <label>Selfparticipation</label>
-                                <h:inputText class="form-control" value="#{administrationModel.selfpart}"/>
+                                <h:inputText class="form-control" value="#{administrationBean.selfpart}"/>
                         </div>
                         <div class="form-group">
                                 <label>Costs Per Day</label>
-                                <h:inputText class="form-control" value="#{administrationModel.costsPerDay}"/>
+                                <h:inputText class="form-control" value="#{administrationBean.costsPerDay}"/>
                         </div>
-                    <h:commandButton value="Create PolicyType" class="btn btn-success btn-lg btn-block" action="#{administrationModel.createPolicyType()}"/>
+                    <h:commandButton value="Create PolicyType" class="btn btn-success btn-lg btn-block" action="#{administrationBean.createPolicyType()}"/>
                 </h:form>  
             </div>
             <div class="col-md-6">
                 <h:form>
                     <div class="form-group">
                         <label>Name</label>
-                        <h:inputText class="form-control" value="#{administrationModel.damageTypeName}"/>
+                        <h:inputText class="form-control" value="#{administrationBean.damageTypeName}"/>
                     </div> 
-                    <h:commandButton value="Create DamageType" class="btn btn-success btn-lg btn block" action="#{administrationModel.createDamageType()}"/>
+                    <h:commandButton value="Create DamageType" class="btn btn-success btn-lg btn block" action="#{administrationBean.createDamageType()}"/>
                 </h:form>
                 
                 

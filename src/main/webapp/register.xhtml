@@ -16,51 +16,51 @@
                     <h:message style="background-color:red; color:white;margin-bottom:5px;" class="form-control" for="registerVal"></h:message>
                         <div class="form-group">
                                 <label>E-Mail</label>
-                                <h:inputText class="form-control" value="#{customerModel.email}"/>
+                                <h:inputText class="form-control" value="#{customerBean.email}"/>
                         </div>
                         <div class="form-group">
                                 <label>Firstname</label>
-                                <h:inputText class="form-control" value="#{customerModel.firstname}"/>
+                                <h:inputText class="form-control" value="#{customerBean.firstname}"/>
                         </div>
                         <div class="form-group">
                                 <label>Lastname</label>
-                                <h:inputText class="form-control" value="#{customerModel.lastname}"/>
+                                <h:inputText class="form-control" value="#{customerBean.lastname}"/>
                         </div>
                         <div class="form-group">
                                 <label>Street</label>
-                                <h:inputText class="form-control" value="#{customerModel.street}"/>
+                                <h:inputText class="form-control" value="#{customerBean.street}"/>
                         </div>
                         <div class="form-group">
                                 <label>Postcode</label>
-                                <h:inputText class="form-control" value="#{customerModel.postCode}"/>
+                                <h:inputText class="form-control" value="#{customerBean.postCode}"/>
                         </div>
                         <div class="form-group">
                                 <label>City</label>
-                                <h:inputText class="form-control" value="#{customerModel.city}"/>
+                                <h:inputText class="form-control" value="#{customerBean.city}"/>
                         </div>
                         <div class="form-group">
                                 <label>Country</label>
-                                <h:inputText class="form-control" value="#{customerModel.country}"/>
+                                <h:inputText class="form-control" value="#{customerBean.country}"/>
                         </div>
                         <div class="form-group">
                                 <label>Password</label>
-                                <h:inputSecret class="form-control"  value="#{customerModel.password}"/>
+                                <h:inputSecret class="form-control"  value="#{customerBean.password}"/>
                         </div>
                         <div class="form-group">
                                 <label>Password</label>
-                                <h:inputSecret class="form-control" value="#{customerModel.password2}"/>
+                                <h:inputSecret class="form-control" value="#{customerBean.password2}"/>
                         </div>
                         <div class="form-group">
                                 <label>IBAN (provided by bank)</label>
-                                <h:inputText class="form-control" value="#{customerModel.iban}"/>
+                                <h:inputText class="form-control" value="#{customerBean.iban}"/>
                         </div>
                         <div class="form-group">
                                 <label>Birthday(d-M-yyyy)</label>
-                                <h:inputText class="form-control" value="#{customerModel.birthday}">
+                                <h:inputText class="form-control" value="#{customerBean.birthday}">
                                     <f:convertDateTime pattern="d-M-yyyy" />
                                 </h:inputText>
                         </div>
-                    <h:commandButton style="margin-bottom:20px;" id="registerVal" value="Register" class="btn btn-success btn-lg btn-block" action="#{customerModel.signup()}"/>
+                    <h:commandButton style="margin-bottom:20px;" id="registerVal" value="Register" class="btn btn-success btn-lg btn-block" action="#{customerBean.signup()}"/>
                 </h:form>
             </div>
         </div>

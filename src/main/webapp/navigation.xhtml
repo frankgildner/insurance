@@ -16,17 +16,17 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class='nav navbar-nav navbar-left'>
-                            <li><h:outputLink rendered="#{!customerModel.isLoggedIn()}" value="register.xhtml">Register</h:outputLink></li>
-                            <li><h:outputLink rendered="#{!customerModel.isLoggedIn()}" value="login.xhtml">Login</h:outputLink></li>
-                            <li><h:outputLink rendered="#{customerModel.isLoggedIn()}" value="profile.xhtml">Profile</h:outputLink></li>
-                            <li><h:outputLink rendered="#{customerModel.isLoggedIn()}" value="policies.xhtml">Policies</h:outputLink></li>
-                            <li><h:outputLink rendered="#{customerModel.isLoggedIn()}" value="damagecases.xhtml">DamageCases</h:outputLink></li>
-                            <li><h:outputLink rendered="#{customerModel.adminIsLoggedIn()}" value="administration.xhtml">Administration</h:outputLink></li>
+                            <li><h:outputLink rendered="#{!customerBean.isLoggedIn()}" value="register.xhtml">Register</h:outputLink></li>
+                            <li><h:outputLink rendered="#{!customerBean.isLoggedIn()}" value="login.xhtml">Login</h:outputLink></li>
+                            <li><h:outputLink rendered="#{customerBean.isLoggedIn()}" value="profile.xhtml">Profile</h:outputLink></li>
+                            <li><h:outputLink rendered="#{customerBean.isLoggedIn()}" value="policies.xhtml">Policies</h:outputLink></li>
+                            <li><h:outputLink rendered="#{customerBean.isLoggedIn()}" value="damagecases.xhtml">DamageCases</h:outputLink></li>
+                            <li><h:outputLink rendered="#{customerBean.adminIsLoggedIn()}" value="administration.xhtml">Administration</h:outputLink></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <c:if test="#{customerModel.isLoggedIn()}">
-                                    <li><a>logged in as #{customerModel.customer.prename}</a></li>
-                                    <li><h:commandLink value="Logout" action="#{customerModel.logout()}"/></li>
+                                <c:if test="#{customerBean.isLoggedIn()}">
+                                    <li><a>logged in as #{customerBean.customer.prename}</a></li>
+                                    <li><h:commandLink value="Logout" action="#{customerBean.logout()}"/></li>
                                 </c:if>
                             </ul>
                     </div>         

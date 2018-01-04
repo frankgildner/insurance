@@ -1,4 +1,4 @@
-package de.othr.insurance.model;
+package de.othr.insurance.bean;
 
 import de.othr.insurance.entity.Customer;
 import de.othr.insurance.entity.Util;
@@ -19,55 +19,70 @@ import lombok.Setter;
 
 @Named
 @SessionScoped
-public class CustomerModel implements Serializable{
+public class CustomerBean implements Serializable{
     
     @Inject
     CustomerService custService;
+    
     @Inject
     BankService bankServ;
     
     @Getter
     @Setter
     private String email;
+    
     @Getter
     @Setter
     private String firstname;
+    
     @Getter
     @Setter
     private String lastname;
+    
     @Getter
     @Setter
     private String iban;
+    
     @Getter
     @Setter
     private String password;
+    
     @Getter
     @Setter
     private String password2;
+    
     @Getter
     @Setter
     private Date birthday;
+    
     @Getter
     @Setter
     private String street;
+    
     @Getter
     @Setter
     private int postCode;
+    
     @Getter
     @Setter
     private String city;
+    
     @Getter
     @Setter
     private String country;
+    
     @Getter
     @Setter
     private Customer customer;
+    
     @Getter
     @Setter
     private Pattern pattern;
+    
     @Getter
     @Setter
     private Matcher matcher;
+    
     @Getter
     @Setter
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
