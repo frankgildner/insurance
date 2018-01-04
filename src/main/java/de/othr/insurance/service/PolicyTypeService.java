@@ -24,7 +24,7 @@ public class PolicyTypeService {
     }
     @Transactional
     public PolicyType getPolicyTypeById(long id){
-        Query q = entityManager.createQuery("Select pt from PolicyType as pt where pt.policyTypeID=:id",PolicyType.class);
+        Query q = entityManager.createQuery("Select pt from PolicyType as pt where pt.id=:id",PolicyType.class);
         q.setParameter("id",id);
         List<PolicyType> list = q.getResultList();
         System.out.println("found list"+list);

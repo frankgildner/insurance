@@ -14,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionPolicy;
 
 @RequestScoped
 @WebService
@@ -26,6 +28,9 @@ public class PolicyService implements Serializable{
     PolicyTypeService polServ;
     @Inject
     BankService bank;
+    @Inject
+    @OptionPolicy
+    private Logger logger;
     
     @Transactional
     public Policy newPolicy(PolicyApplicationDTO p){
@@ -55,6 +60,7 @@ public class PolicyService implements Serializable{
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
         if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice())) {
             entityManager.persist(newP);
+            logger.info("new policy created: (id)" + newP.getId());
             return newP;
         } else {
             return null;

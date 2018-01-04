@@ -2,16 +2,19 @@ package de.othr.insurance.service;
 
 import de.othr.insurance.entity.Address;
 import de.othr.insurance.entity.Customer;
-import helper.BCrypt;
+import utils.BCrypt;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionCustomer;
 
 @RequestScoped
 @WebService
@@ -19,6 +22,10 @@ public class CustomerService {
     @PersistenceContext(unitName="insurancePU")
     private EntityManager entityManager;
     private static int workload = 12;
+    
+    @Inject
+    @OptionCustomer
+    private Logger logger;
     
     @Transactional
     public Customer signup(String email, String firstname, String lastname, Date birthday, String iban, String street, int postCode, String city, String country, String password){
@@ -37,6 +44,9 @@ public class CustomerService {
                 birthday,
                 hashedPW);
         entityManager.persist(c);
+        
+        logger.info("new user created: " + c.getEmail());
+        
         return c;
         }
         
@@ -64,6 +74,7 @@ public class CustomerService {
     public String deleteCustomer(Customer customer){
         Customer c = entityManager.find(Customer.class,customer.getId());
         entityManager.remove(c);
+        logger.info("user successfully deleted");
         return "Customer successfully deleted";
     }
     
@@ -78,6 +89,11 @@ public class CustomerService {
             return cust.get(0);
         }
     }
+    
+    /*
+        generate safe passwords with bcrypt
+        https://gist.github.com/craSH/5217757
+    */
     
     @Transactional
     public String hashPassword(String password){

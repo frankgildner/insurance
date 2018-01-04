@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionDamageCase;
 
 @RequestScoped
 @WebService
@@ -24,6 +26,9 @@ public class DamageCaseService implements Serializable{
     CustomerService custServ;
     @Inject
     BankService bank;
+    @Inject
+    @OptionDamageCase
+    private Logger logger;
     
     @Transactional
     public DamageCase getDamageCase(long damageCaseID){
@@ -50,6 +55,7 @@ public class DamageCaseService implements Serializable{
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
         if(bank.doTransfer(InsuranceIban, customer.getIban(),refund)) {
             entityManager.persist(newDC);
+            logger.info("new Damagecase created: " + newDC.getDescription());
             return newDC;
         } else {
             return null;
