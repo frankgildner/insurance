@@ -6,8 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class PolicyType implements Serializable {
-    @Id @GeneratedValue private long policyTypeID;
+public class PolicyType extends BaseEntity implements Serializable {
     private String name;
     private double selfparticipation;
     private double pricePerDay;
@@ -20,15 +19,7 @@ public class PolicyType implements Serializable {
         this.selfparticipation = selfparticipation;
         this.pricePerDay = pricePerDay;
     }
-
-    public long getPolicyTypeID() {
-        return policyTypeID;
-    }
-
-    public void setPolicyTypeID(long policyTypeID) {
-        this.policyTypeID = policyTypeID;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -52,32 +43,7 @@ public class PolicyType implements Serializable {
     public void setPricePerDay(double pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + (int) (this.policyTypeID ^ (this.policyTypeID >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PolicyType other = (PolicyType) obj;
-        if (this.policyTypeID != other.policyTypeID) {
-            return false;
-        }
-        return true;
-    }
-
+    
     @Override
     public String toString() {
         return name + "(" + selfparticipation*100 + " % SP, " + pricePerDay + " €/day)";

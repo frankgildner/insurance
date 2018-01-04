@@ -62,7 +62,7 @@ public class CustomerService {
     
     @Transactional
     public String deleteCustomer(Customer customer){
-        Customer c = entityManager.find(Customer.class,customer.getCustID());
+        Customer c = entityManager.find(Customer.class,customer.getId());
         entityManager.remove(c);
         return "Customer successfully deleted";
     }

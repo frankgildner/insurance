@@ -20,6 +20,10 @@ public abstract class BaseEntity implements Serializable{
     
     public BaseEntity(){
     }
+    
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public int hashCode() {
@@ -45,7 +49,7 @@ public abstract class BaseEntity implements Serializable{
 
     @Override
     public String toString() {
-        return "BaseEntity{" + "id=" + id + '}';
+        return this.getClass().getSimpleName() + " (id=" + id + ')';
     }
     
     

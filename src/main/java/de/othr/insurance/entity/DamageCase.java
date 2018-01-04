@@ -9,8 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class DamageCase implements Serializable{
-    @Id @GeneratedValue private long damageCaseId;
+public class DamageCase extends BaseEntity implements Serializable{
     private String description;
     @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     private DamageType damageType;
@@ -48,14 +47,6 @@ public class DamageCase implements Serializable{
     public void setRefund(double refund) {
         this.refund = refund;
     }
-    
-    public long getDamageCaseId() {
-        return damageCaseId;
-    }
-
-    public void setDamageCaseId(long damageCaseId) {
-        this.damageCaseId = damageCaseId;
-    }
 
     public String getDescription() {
         return description;
@@ -88,30 +79,4 @@ public class DamageCase implements Serializable{
     public void setCosts(double costs) {
         this.costs = costs;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (int) (this.damageCaseId ^ (this.damageCaseId >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final DamageCase other = (DamageCase) obj;
-        if (this.damageCaseId != other.damageCaseId) {
-            return false;
-        }
-        return true;
-    }
-    
 }

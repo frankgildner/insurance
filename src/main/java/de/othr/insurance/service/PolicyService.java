@@ -32,7 +32,7 @@ public class PolicyService implements Serializable{
         long custID = 0;
         Customer c = custServ.getCustomerByEmail(p.getEmail());
         if(c != null){
-            custID = c.getCustID();
+            custID = c.getId();
         } else {
             c = custServ.signup(p.getEmail(), 
                     p.getPrename(), 
@@ -79,7 +79,7 @@ public class PolicyService implements Serializable{
     }
     @Transactional
     public void cancelPolicy(Policy policy){
-        Policy p = entityManager.find(Policy.class,policy.getPolicyId());
+        Policy p = entityManager.find(Policy.class,policy.getId());
         p.setStatus("canceled");
     }
     @Transactional

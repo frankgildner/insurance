@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Policy implements Serializable {
-    @Id @GeneratedValue private long policyId;
+public class Policy extends BaseEntity implements Serializable {
     private Date startDate;
     private int duration;
     private double price;
@@ -50,15 +49,7 @@ public class Policy implements Serializable {
     public void setItemID(long itemID) {
         this.itemID = itemID;
     }
-
-    public long getPolicyId() {
-        return policyId;
-    }
-
-    public void setPolicyId(long policyId) {
-        this.policyId = policyId;
-    }
-
+    
     public Date getStartDate() {
         return startDate;
     }
@@ -98,31 +89,5 @@ public class Policy implements Serializable {
     public void setPolicyTypeID(PolicyType policyTypeID) {
         this.policyTypeID = policyTypeID;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + (int) (this.policyId ^ (this.policyId >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Policy other = (Policy) obj;
-        if (this.policyId != other.policyId) {
-            return false;
-        }
-        return true;
-    }
-    
 }
 

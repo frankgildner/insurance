@@ -6,8 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Address implements Serializable {
-    @Id @GeneratedValue private long addressID;
+public class Address extends BaseEntity implements Serializable {
     private String street;
     private int postCode;
     private String city;

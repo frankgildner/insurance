@@ -7,9 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class PolicyApplicationDTO implements Serializable{
-
-    @Id @GeneratedValue private long paDtoId;
+public class PolicyApplicationDTO extends BaseEntity implements Serializable{
     private String prename;
     private String surname;
     private String street;
@@ -67,14 +65,6 @@ public class PolicyApplicationDTO implements Serializable{
 
     public void setIban(String iban) {
         this.iban = iban;
-    }
-
-    public long getPaDtoId() {
-        return paDtoId;
-    }
-
-    public void setPaDtoId(long paDtoId) {
-        this.paDtoId = paDtoId;
     }
 
     public String getPrename() {
@@ -165,30 +155,4 @@ public class PolicyApplicationDTO implements Serializable{
     public void setPolicyType(PolicyType policyType) {
         this.policyType = policyType;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (int) (this.paDtoId ^ (this.paDtoId >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PolicyApplicationDTO other = (PolicyApplicationDTO) obj;
-        if (this.paDtoId != other.paDtoId) {
-            return false;
-        }
-        return true;
-    }
-    
 }

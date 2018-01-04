@@ -38,7 +38,7 @@ public class DamageTypeConverter implements Converter {
         if(!value.getClass().equals(DamageType.class)){
             return null;
         }
-        return String.valueOf(((DamageType)value).getDamageTypeID());
+        return String.valueOf(((DamageType)value).getId());
     }
     
 }

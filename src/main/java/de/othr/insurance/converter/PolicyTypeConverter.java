@@ -40,6 +40,6 @@ public class PolicyTypeConverter implements Converter{
         if(!value.getClass().equals(PolicyType.class)){
             return null;
         }
-        return String.valueOf(((PolicyType)value).getPolicyTypeID());
+        return String.valueOf(((PolicyType)value).getId());
     }
 }

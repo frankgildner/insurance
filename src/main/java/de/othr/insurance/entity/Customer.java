@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Customer implements Serializable{
-    @Id @GeneratedValue private long custID;
+public class Customer extends BaseEntity implements Serializable{
     private String prename;
     private String surname;
     @OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST,CascadeType.REMOVE})
@@ -21,7 +20,6 @@ public class Customer implements Serializable{
     private String password;
     private String email;
 
-    /* zwingend notwendig */
     public Customer(){
     }
     
@@ -33,14 +31,6 @@ public class Customer implements Serializable{
         this.birthday=birthday;
         this.password = password;
         this.email = email;   
-    }
-
-    public long getCustID() {
-        return custID;
-    }
-
-    public void setCustID(long custID) {
-        this.custID = custID;
     }
 
     public String getPrename() {
@@ -98,27 +88,4 @@ public class Customer implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (int) (this.custID ^ (this.custID >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Customer other = (Customer) obj;
-        return this.custID == other.custID;
-    }
-    
 }
