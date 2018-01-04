@@ -6,7 +6,10 @@ import de.othr.insurance.entity.PolicyType;
 import de.othr.insurance.entity.PolicyApplicationDTO;
 import de.othr.insurance.repository.PolicyRepository;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.Schedule;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
@@ -97,5 +100,22 @@ public class PolicyService implements Serializable{
     @Transactional
     public Policy getPolicyById(long policyID){
         return polRep.findById(policyID);
+    }
+    
+    @Transactional
+    public void checkPolicies(){
+        List<Policy> policies = polRep.findAll();
+        
+        for (Policy p : policies){
+            Calendar c = Calendar.getInstance();
+            c.setTime(p.getStartDate());
+            c.add(Calendar.DATE,p.getDuration());
+            Date polTime = c.getTime();
+            c.setTime(new Date());
+            if (c.getTime().after(polTime)){
+                p.setStatus("stopped");
+            }
+        } 
+        System.out.println("ckecked policies");
     }
 }

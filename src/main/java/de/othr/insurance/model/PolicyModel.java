@@ -109,5 +109,6 @@ public class PolicyModel implements Serializable{
     
     public void init(){
         this.policyTypes = this.getPolicyTypes();
+        polService.checkPolicies();
     }
 }
