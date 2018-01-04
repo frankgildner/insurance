@@ -2,18 +2,14 @@ package de.othr.insurance.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Customer extends BaseEntity implements Serializable{
     private String prename;
     private String surname;
-    @OneToOne(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST,CascadeType.REMOVE})
+    @Embedded
     private Address address;
     private String iban;
     private Date birthday;

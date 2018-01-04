@@ -1,12 +1,10 @@
 package de.othr.insurance.entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
-@Entity
-public class Address extends BaseEntity implements Serializable {
+@Embeddable
+public class Address implements Serializable {
     private String street;
     private int postCode;
     private String city;
