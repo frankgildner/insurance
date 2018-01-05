@@ -10,8 +10,6 @@ import de.othr.insurance.service.PolicyTypeService;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
@@ -114,9 +112,10 @@ public class PolicyBean implements Serializable{
             this.getSelectedPolicyType()));
             if(this.policy != null){
                 this.setItemId(0);
-            this.setDuration(0);
-            return policy;
+                this.setDuration(0);
+                return policy;
             } else {
+                FacesContext.getCurrentInstance().addMessage("policyForm:createPol",new FacesMessage("Not enough money on the bank account!"));
                 return null;
             }
         } else {

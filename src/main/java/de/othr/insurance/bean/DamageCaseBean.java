@@ -54,7 +54,6 @@ public class DamageCaseBean implements Serializable {
     @Setter
     private DamageType damType;
     
-    @Getter
     @Setter
     private List<DamageType> damageTypes;
     
@@ -120,11 +119,17 @@ public class DamageCaseBean implements Serializable {
                 this.selectedDamageType, 
                 custModel.getCustomer(), 
                 this.costs);
-            this.description = "";
-            this.selectedDamageType = null;
-            this.selectedPolicy = null;
-            this.costs = 0;
-            return damageCase;
+            if(this.damageCase != null){
+                this.description = "";
+                this.selectedDamageType = null;
+                this.selectedPolicy = null;
+                this.costs = 0;
+                return damageCase;
+            } else {
+                FacesContext.getCurrentInstance().addMessage("dcForm:createDC",new FacesMessage("Refund could not transmitted! Please try again later!"));  
+                return null;
+            }
+            
         } else {
             FacesContext.getCurrentInstance().addMessage("dcForm:createDC",new FacesMessage("Costs cannot be 0 or smaller!"));   
             return null;
