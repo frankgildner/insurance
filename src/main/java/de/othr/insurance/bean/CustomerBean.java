@@ -61,7 +61,7 @@ public class CustomerBean implements Serializable{
     
     @Getter
     @Setter
-    private int postCode;
+    private String postCode;
     
     @Getter
     @Setter
@@ -84,8 +84,10 @@ public class CustomerBean implements Serializable{
     private Matcher matcher;
     
     @Getter
-    @Setter
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    
+    @Getter
+    private static final String POSTCODE_PATTERN="^[0-9]*$";
     
     public String validateCredentials(){
      this.customer = custService.login(email, password);
@@ -115,7 +117,7 @@ public class CustomerBean implements Serializable{
             !this.password2.equals("") &&
             this.birthday != null &&
             !this.street.equals("") &&
-            this.postCode > 0 &&
+            !this.postCode.equals("") &&
             !this.city.equals("") &&
             !this.country.equals("")) {
             
@@ -124,13 +126,16 @@ public class CustomerBean implements Serializable{
             if(matcher.matches()){
                 if(this.password.equals(this.password2)){
                     if(bankServ.checkIban(this.iban)){
-                       this.customer = custService.signup(this.email, 
+                        pattern = Pattern.compile(POSTCODE_PATTERN);
+                        matcher = pattern.matcher(this.postCode);
+                        if(matcher.matches()){
+                            this.customer = custService.signup(this.email, 
                             this.firstname, 
                             this.lastname, 
                             this.birthday, 
                             this.iban, 
                             this.street, 
-                            this.postCode, 
+                            Integer.parseInt(this.postCode), 
                             this.city, 
                             this.country, 
                             this.password);
@@ -147,7 +152,12 @@ public class CustomerBean implements Serializable{
                             // Email exists
                             FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("E-Mail is already existing! Please use another one!")); 
                             return null;
-                        } 
+                        }
+                        } else {
+                            FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please only use numbers in postcode!")); 
+                            return null;
+                        }
+                        
                     } else {
                         FacesContext.getCurrentInstance().addMessage("registerForm:registerVal",new FacesMessage("Please type in a right IBAN! If you do not have one, please sign up at the bank!"));
                         return null;

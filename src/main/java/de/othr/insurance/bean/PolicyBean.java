@@ -97,7 +97,7 @@ public class PolicyBean implements Serializable{
                 custModel.getLastname(),
                 custModel.getIban(),
                 custModel.getStreet(),
-                custModel.getPostCode(),
+                Integer.parseInt(custModel.getPostCode()),
                 custModel.getCity(),
                 custModel.getCountry(),
                 custModel.getBirthday(),
