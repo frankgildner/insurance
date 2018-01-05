@@ -14,16 +14,15 @@
         </ui:define>
         <ui:define name="pageContent">
             <div class="col-md-4 col-md-offset-1">
-                <h:form>
+                <h:form id="dcForm">
                     <div class="form-group">
                         <label>Description</label>
-                        <h:inputTextarea class="form-control" value="#{damageCaseBean.description}"/>
+                        <h:inputTextarea id="description" class="form-control" value="#{damageCaseBean.description}" required="true"/>
                     </div>
                     <div class="form-group">
                         <label>DamageType</label>
                         <h:selectOneMenu value ="#{damageCaseBean.selectedDamageType}" class="form-control">
                             <f:converter binding="#{damageCaseBean.damTypeConv}"/>
-                            <f:selectItem itemValue="#{null}" itemLabel="--select--" />
                             <f:selectItems value="#{damageCaseBean.damageTypes}" var="damageType" itemLabel="#{damageType.name}"/>
                         </h:selectOneMenu>
                     </div>
@@ -31,15 +30,15 @@
                         <label>Policy</label>
                         <h:selectOneMenu value ="#{damageCaseBean.selectedPolicy}" class="form-control">
                             <f:converter binding="#{damageCaseBean.policyConv}"/>
-                            <f:selectItem itemValue="#{null}" itemLabel="--select--" />
-                            <f:selectItems value="#{damageCaseBean.policies}" var="policy" itemLabel="#{policy.itemID}"/>
+                            <f:selectItems value="#{damageCaseBean.policies}" var="policy" itemLabel="Item: #{policy.itemID} - duration: #{policy.duration} days - policyType: #{policy.policyTypeID}"/>
                         </h:selectOneMenu>
                     </div>
                     <div class="form-group">
                         <label>Costs</label>
-                        <h:inputText class="form-control" value="#{damageCaseBean.costs}"/>
+                        <h:inputText id="costs" class="form-control" value="#{damageCaseBean.costs}" required="true"/>
                     </div>
-                    <h:commandButton value="Create DamageCase" class="btn btn-success btn-lg btn-block" action="#{damageCaseBean.createDamageCase()}"/>
+                    <h:commandButton id="createDC" value="Create DamageCase" class="btn btn-success btn-lg btn-block" action="#{damageCaseBean.createDamageCase()}"/>
+                    <h:messages style="background-color:red; color:white;margin-bottom:5px; list-style: none; height:4em;" class="form-control" globalOnly="false" showDetail="false" showSummary="true"></h:messages>
                 </h:form>
             </div>
             <div class="col-md-6">

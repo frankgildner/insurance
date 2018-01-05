@@ -10,9 +10,13 @@ import de.othr.insurance.service.PolicyTypeService;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.component.html.HtmlInputHidden;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
@@ -93,27 +97,33 @@ public class PolicyBean implements Serializable{
     }
     
     public Policy createPolicy(){
-             this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstname(),
-                custModel.getLastname(),
-                custModel.getIban(),
-                custModel.getStreet(),
-                Integer.parseInt(custModel.getPostCode()),
-                custModel.getCity(),
-                custModel.getCountry(),
-                custModel.getBirthday(),
-                this.getItemId(),
-                this.getStartDate(),
-                this.getDuration(),
-                custModel.getPassword(),
-                custModel.getEmail(),
-                this.getSelectedPolicyType()));
-        if(this.policy != null){
-            this.setItemId(0);
-        this.setDuration(0);
-        return policy;
+        if(this.duration > 0){
+            this.policy = polService.newPolicy(new PolicyApplicationDTO(custModel.getFirstname(),
+            custModel.getLastname(),
+            custModel.getIban(),
+            custModel.getStreet(),
+            custModel.getPostCode(),
+            custModel.getCity(),
+            custModel.getCountry(),
+            custModel.getBirthday(),
+            this.getItemId(),
+            this.getStartDate(),
+            this.getDuration(),
+            custModel.getPassword(),
+            custModel.getEmail(),
+            this.getSelectedPolicyType()));
+            if(this.policy != null){
+                this.setItemId(0);
+            this.setDuration(0);
+            return policy;
+            } else {
+                return null;
+            }
         } else {
+            FacesContext.getCurrentInstance().addMessage("policyForm:createPol",new FacesMessage("Duration: Please enter a number greater than 0!"));   
             return null;
-        }     
+        }
+                  
     }
     
     public String  cancelPol(Policy policy){

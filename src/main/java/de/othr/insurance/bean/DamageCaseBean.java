@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
@@ -111,17 +113,23 @@ public class DamageCaseBean implements Serializable {
     }
     
     public DamageCase createDamageCase(){
-        this.damageCase = damCaseServ.newDamagecase(
+        if(this.costs > 0){
+            this.damageCase = damCaseServ.newDamagecase(
                 this.description, 
                 this.selectedPolicy, 
                 this.selectedDamageType, 
                 custModel.getCustomer(), 
                 this.costs);
-        this.description = "";
-        this.selectedDamageType = null;
-        this.selectedPolicy = null;
-        this.costs = 0;
-        return damageCase;
+            this.description = "";
+            this.selectedDamageType = null;
+            this.selectedPolicy = null;
+            this.costs = 0;
+            return damageCase;
+        } else {
+            FacesContext.getCurrentInstance().addMessage("dcForm:createDC",new FacesMessage("Costs cannot be 0 or smaller!"));   
+            return null;
+        }
+        
     }
     
 }

@@ -14,30 +14,36 @@
         </ui:define>
         <ui:define name="pageContent">
                 <div class="col-md-4 col-md-offset-1">
-                    <h:form>
+                    <h:form id="policyForm">
                         <div class="form-group">
                             <label>Startdate(d-m-yyyy)</label>
-                            <h:inputText class="form-control" value="#{policyBean.startDate}">
+                            <h:inputText id="startDate" class="form-control" value="#{policyBean.startDate}" required="true">
                                 <f:convertDateTime pattern="d-M-yyyy" />
                             </h:inputText>
                         </div>
                         <div class="form-group">
                                 <label>Duration</label>
-                                <h:inputText class="form-control" value="#{policyBean.duration}"/>
+                                <h:inputText class="form-control" id="duration" value="#{policyBean.duration}" maxlength="5" 
+                                             converterMessage="Duration: Please enter digits only." validatorMessage="Please enter max 5 digits." required="true">
+                                    <f:validateLength minimum="1" maximum="5" />
+                                </h:inputText>
                         </div>
                         <div class="form-group">
                                 <label>Item ID</label>
-                                <h:inputText class="form-control" value="#{policyBean.itemId}"/>
+                                <h:inputText class="form-control" value="#{policyBean.itemId}" maxlength="20"
+                                             converterMessage="ItemID: Please enter digits only!" validatorMessage="Please enter max 20 digits." required="true">
+                                    <f:validateLength minimum="1" maximum="20"/>
+                                </h:inputText>
                         </div>
                         <div class="form-group">
                             <label>PolicyType</label>
-                            <h:selectOneMenu value ="#{policyBean.selectedPolicyType}" class="form-control">
+                            <h:selectOneMenu  id="policytype" value ="#{policyBean.selectedPolicyType}" class="form-control">
                                 <f:converter binding="#{policyBean.polTypeConv}"/>
-                                <f:selectItem itemValue="#{null}" itemLabel="--select--" />
                                 <f:selectItems value="#{policyBean.policyTypes}" var="policyType" itemLabel="#{policyType.name}"/>
                             </h:selectOneMenu>
                         </div>
-                        <h:commandButton value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyBean.createPolicy()}"/>
+                        <h:commandButton id="createPol" value="Create Policy" class="btn btn-success btn-lg btn-block" action="#{policyBean.createPolicy()}"/>
+                        <h:messages globalOnly="false" style="background-color:red; color:white;margin-bottom:5px; list-style:none; height:4em;" class="form-control"></h:messages>
                     </h:form>
                 </div>
                 <div class="col-md-6">
