@@ -1,7 +1,7 @@
 package de.othr.insurance.bean;
 
 import de.othr.insurance.entity.Customer;
-import de.othr.insurance.entity.Util;
+import utils.Util;
 import de.othr.insurance.service.BankService;
 import de.othr.insurance.service.CustomerService;
 import java.io.Serializable;

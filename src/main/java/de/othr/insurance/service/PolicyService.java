@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Schedule;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.jws.WebService;
@@ -63,10 +62,14 @@ public class PolicyService implements Serializable{
                 p.getPolicyType()
         );
         String InsuranceIban = custServ.getCustomerByEmail("admin@admin.de").getIban();
-        if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice(),"costs of policy")) {
+        if(bank.checkIban(c.getIban())){
+            if(bank.doTransfer(c.getIban(),InsuranceIban,newP.getPrice(),"costs of policy")) {
             polRep.persist(newP);
             logger.info("new policy created: (id)" + newP.getId());
             return newP;
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
