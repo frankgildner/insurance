@@ -37,6 +37,15 @@ public class PolicyService implements Serializable{
     PolicyRepository polRep;
     
     @Transactional
+    public Long getNewPolicyNumber(PolicyApplicationDTO p){
+        Policy newPol = newPolicy(p);
+        if(newPol == null){
+            return 0L;
+        }
+        return newPol.getPolicyNumber();
+    }
+    
+    @Transactional
     public Policy newPolicy(PolicyApplicationDTO p){
         long custID = 0;
         Customer c = custServ.getCustomerByEmail(p.getEmail());

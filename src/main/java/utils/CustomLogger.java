@@ -1,5 +1,6 @@
 package utils;
 
+import de.othr.insurance.service.BankService;
 import de.othr.insurance.service.CustomerService;
 import de.othr.insurance.service.DamageCaseService;
 import de.othr.insurance.service.DamageTypeService;
@@ -9,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionBank;
 import utils.qualifiers.OptionCustomer;
 import utils.qualifiers.OptionDamageCase;
 import utils.qualifiers.OptionDamageType;
@@ -55,6 +57,12 @@ public class CustomLogger {
     @OptionDamageType
     public Logger damageTypeLogger () {  
         return LogManager.getLogger(DamageTypeService.class); 
-    } 
+    }
+    @Produces
+    @ApplicationScoped
+    @OptionBank
+    public Logger bankLogger() {
+        return LogManager.getLogger(BankService.class);
+    }
     
 }

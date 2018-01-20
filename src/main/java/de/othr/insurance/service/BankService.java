@@ -9,10 +9,17 @@ import de.oth.gmeiner.swgmeiner.service.TransferService;
 import de.oth.gmeiner.swgmeiner.service.Transfer;
 import de.oth.gmeiner.swgmeiner.service.Customer;
 import de.oth.gmeiner.swgmeiner.service.TransferDto;
+import javax.inject.Inject;
+import org.apache.logging.log4j.Logger;
+import utils.qualifiers.OptionBank;
 
 @RequestScoped
 @WebService
 public class BankService {
+    
+    @Inject
+    @OptionBank
+    private Logger logger;
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/im-lamport_8080/SWGmeiner-1.0/transferService.wsdl")
     private TransferService_Service service;
@@ -24,7 +31,7 @@ public class BankService {
     @Transactional
     public boolean doTransfer(String transmitter, String receiver, double amount, String purpose){
 
-        try { // Call Web Service Operation
+        try { 
             port = service.getTransferServicePort();
             TransferDto newDTO = new TransferDto();
             newDTO.setAmount(amount);
@@ -34,7 +41,7 @@ public class BankService {
             result = port.createTransfer(newDTO);
             System.out.println("Result = "+result);
         } catch (Exception ex) {
-            // TODO handle custom exceptions here
+            logger.error(ex.getMessage());
         }
         return result != null;
     }
@@ -42,11 +49,11 @@ public class BankService {
     @Transactional
     public boolean checkIban(String iban){
         try {
-        port = service.getTransferServicePort();
-        System.out.println("iban: "+iban);
-        customer = port.checkIban(iban);
+            port = service.getTransferServicePort();
+            System.out.println("iban: "+iban);
+            customer = port.checkIban(iban);
         } catch( Exception ex) {
-            throw new RuntimeException("Error: Could not check Iban "+ex.getMessage(), ex);
+            logger.error(ex.getMessage());
         }
         return customer != null;
     }
