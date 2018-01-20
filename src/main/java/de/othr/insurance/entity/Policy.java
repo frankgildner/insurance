@@ -69,5 +69,9 @@ public class Policy extends BaseEntity implements Serializable {
         this.policyTypeID = policyTypeID;
         this.status = "running";
     }
+    
+    public Long getPolicyNumber(){
+        return this.getId();
+    }
 }
 

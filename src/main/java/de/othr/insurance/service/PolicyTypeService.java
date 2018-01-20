@@ -32,6 +32,11 @@ public class PolicyTypeService implements Serializable{
     }
     
     @Transactional
+    public PolicyType getPolicyTypeByName(String name){
+        return ptRep.getPolicyTypeByName(name);
+    }
+    
+    @Transactional
     public PolicyType createPolicyType(String name, double selfParticipation, int costsPerDay){
         PolicyType newPT = new PolicyType(name,selfParticipation,costsPerDay);
         ptRep.persist(newPT);

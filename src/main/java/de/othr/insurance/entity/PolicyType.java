@@ -44,7 +44,9 @@ public class PolicyType extends BaseEntity implements Serializable {
     @Override
     public String toString() {
         return name + "(" + selfparticipation*100 + " % SP, " + pricePerDay + " €/day)";
+    } 
+    
+    public Long getTypeId(){
+        return this.getId();
     }
-    
-    
 }

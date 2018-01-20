@@ -96,11 +96,6 @@ public class PolicyService implements Serializable{
     }
     
     @Transactional
-    public Policy getPolicy(long policyID){
-        return polRep.findById(policyID);
-    }
-    
-    @Transactional
     public Policy getPolicyById(long policyID){
         return polRep.findById(policyID);
     }

@@ -8,6 +8,7 @@ import javax.xml.ws.WebServiceRef;
 import de.oth.gmeiner.swgmeiner.service.TransferService;
 import de.oth.gmeiner.swgmeiner.service.Transfer;
 import de.oth.gmeiner.swgmeiner.service.Customer;
+import de.oth.gmeiner.swgmeiner.service.TransferDto;
 
 @RequestScoped
 @WebService
@@ -22,11 +23,18 @@ public class BankService {
         
     @Transactional
     public boolean doTransfer(String transmitter, String receiver, double amount, String purpose){
-        try {
-        port = service.getTransferServicePort();
-        result = port.createTransfer(transmitter, receiver, amount, purpose);
-        } catch(Exception ex) {
-            throw new RuntimeException("Error: Could not create Transfer "+ex.getMessage(), ex);
+
+        try { // Call Web Service Operation
+            port = service.getTransferServicePort();
+            TransferDto newDTO = new TransferDto();
+            newDTO.setAmount(amount);
+            newDTO.setReceiver(receiver);
+            newDTO.setTransmitter(transmitter);
+            newDTO.setPurpose(purpose);
+            result = port.createTransfer(newDTO);
+            System.out.println("Result = "+result);
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
         }
         return result != null;
     }
